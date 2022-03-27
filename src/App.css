@@ -6,6 +6,11 @@ html {
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
   font-size: 1rem;
+  color: #161515;
+}
+.App,
+.fullHeight {
+  height: 100%;
 }
 
 p {
@@ -17,4 +22,18 @@ p {
   max-width: 1450px;
   padding: 0 10px;
   margin: 0 auto;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+  text-transform: capitalize;
 }
