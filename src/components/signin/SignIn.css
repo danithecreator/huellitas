@@ -100,3 +100,15 @@
   margin-top: 1em;
   font-size: 2rem;
 }
+.signin__links {
+  width: 70%;
+  text-align: right;
+  margin-bottom: 2em;
+}
+.signin__links a {
+  color: #ea999b;
+  text-decoration: underline;
+}
+.signin__links a:hover {
+  color: #f3b26c;
+}

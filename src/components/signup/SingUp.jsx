@@ -3,6 +3,7 @@ import './SingUp.css'
 import FormInput from '../forms/formInput/FormInput'
 import Button from '../forms/button/Button'
 import { auth, handUserProfile } from './../../firebase/utils'
+import AuthWrapper from '../authWrapper/AuthWrapper'
 const initialState = {
   displayName: '',
   email: '',
@@ -56,68 +57,66 @@ class SingUp extends Component {
   render() {
     const { displayName, email, password, confirmPassword, errors } = this.state
     return (
-      <div className='signup'>
-        <div className='signup_container'>
-          <div className='signup__formContainer'>
-            <h2 className='signup__title'>Registrate</h2>
-            {errors.length > 0 && (
-              <ul>
-                {errors.map((err, index) => {
-                  return (
-                    <li
-                      className='
+      <AuthWrapper size='authWrapper__reg'>
+        <div className='signup__formContainer'>
+          <h2 className='signup__title'>Registrate</h2>
+          {errors.length > 0 && (
+            <ul>
+              {errors.map((err, index) => {
+                return (
+                  <li
+                    className='
                   signup__error'
-                      key={index}
-                    >
-                      {err}
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-            <form onSubmit={this.handleSubmit} className='signup__form'>
-              <FormInput
-                styleclass='regInput'
-                type='text'
-                value={displayName}
-                name='displayName'
-                label='Ingrese su nombre completo'
-                placeholder='Daniel'
-                handleChange={this.handleChange}
-              ></FormInput>
-              <FormInput
-                styleclass='regInput'
-                type='email'
-                value={email}
-                name='email'
-                label='Ingrese su email'
-                placeholder='Daniel@email.com'
-                handleChange={this.handleChange}
-              ></FormInput>
-              <FormInput
-                styleclass='regInput'
-                type='password'
-                value={password}
-                name='password'
-                label='Ingrese su contraseña'
-                placeholder='******'
-                handleChange={this.handleChange}
-              ></FormInput>
-              <FormInput
-                styleclass='regInput'
-                type='password'
-                value={confirmPassword}
-                name='confirmPassword'
-                label='Confirme su contraseña'
-                placeholder='******'
-                handleChange={this.handleChange}
-              ></FormInput>
+                    key={index}
+                  >
+                    {err}
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+          <form onSubmit={this.handleSubmit} className='signup__form'>
+            <FormInput
+              styleclass='regInput'
+              type='text'
+              value={displayName}
+              name='displayName'
+              label='Ingrese su nombre completo'
+              placeholder='Daniel'
+              handleChange={this.handleChange}
+            ></FormInput>
+            <FormInput
+              styleclass='regInput'
+              type='email'
+              value={email}
+              name='email'
+              label='Ingrese su email'
+              placeholder='Daniel@email.com'
+              handleChange={this.handleChange}
+            ></FormInput>
+            <FormInput
+              styleclass='regInput'
+              type='password'
+              value={password}
+              name='password'
+              label='Ingrese su contraseña'
+              placeholder='******'
+              handleChange={this.handleChange}
+            ></FormInput>
+            <FormInput
+              styleclass='regInput'
+              type='password'
+              value={confirmPassword}
+              name='confirmPassword'
+              label='Confirme su contraseña'
+              placeholder='******'
+              handleChange={this.handleChange}
+            ></FormInput>
 
-              <Button type='btnRegular'>Registrate</Button>
-            </form>
-          </div>
+            <Button type='btnRegular'>Registrate</Button>
+          </form>
         </div>
-      </div>
+      </AuthWrapper>
     )
   }
 }
