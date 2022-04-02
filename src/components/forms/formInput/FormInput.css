@@ -1,0 +1,21 @@
+.formRow {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-top: 1.2em;
+}
+.regInput {
+  width: 100%;
+  margin: 1em 0;
+  border: none;
+  border-bottom: 1px solid #f6d2ab;
+  transition: all ease-in-out 0.4s;
+}
+
+.regInput:focus {
+  outline: none;
+}
+.regInput::placeholder {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+}

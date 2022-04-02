@@ -1,0 +1,35 @@
+.btnGoogle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 1em;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 9px 9px 42px #dbdbdb, -9px -9px 42px #ffffff;
+  transition: all ease-in-out 150ms;
+}
+.btnGoogle p {
+  font-size: 16px;
+  margin: 1em 0.5em;
+}
+.btnGoogle:hover {
+  transform: scale(1.1);
+}
+
+.btnRegular {
+  width: 70%;
+  padding: 0.5em;
+  border-radius: 10px;
+  background: #f6d2ab;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 2em;
+  font-size: 20px;
+  transition: all ease-in-out 200ms;
+}
+.btnRegular:hover {
+  background: #f3b26c;
+}

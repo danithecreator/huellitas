@@ -1,0 +1,102 @@
+.signin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.signin_container {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+
+.signin__formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signin__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.form__input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.form__input input {
+  width: 100%;
+  margin: 1em 0 2em 0;
+  border: none;
+  border-bottom: 1px solid #f6d2ab;
+  transition: all ease-in-out 0.4s;
+}
+.form__input label {
+  color: rgba(0, 0, 0, 0.8);
+}
+.form__input input:focus {
+  outline: none;
+}
+.form__input input::placeholder {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.signin__logo {
+  display: flex;
+  width: 15em;
+  height: 10em;
+}
+.signin__element {
+  width: 50%;
+}
+.signin__image img {
+  border-radius: 0 50px 50px 0;
+}
+.signin__emailButton {
+  width: 70%;
+  padding: 0.5em;
+  border-radius: 10px;
+  background: #f6d2ab;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 2em;
+  font-size: 20px;
+  transition: all ease-in-out 200ms;
+}
+.signin__emailButton:hover {
+  background: #f3b26c;
+}
+.signin__formContainer p {
+  font-size: 18px;
+  margin-bottom: 1em;
+}
+.signin__googleButton {
+  width: 70%;
+  padding: 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 9px 9px 42px #dbdbdb, -9px -9px 42px #ffffff;
+}
+.signin__googleButtonContainer p {
+  font-size: 16px;
+  margin: 0 5px;
+}
+.signin__googleButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.signin__title {
+  margin-top: 1em;
+  font-size: 2rem;
+}

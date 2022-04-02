@@ -1,8 +1,12 @@
 import React from 'react'
 import './Header.css'
 import Logo from '../../assets/logo.svg'
+import { connect } from 'react-redux'
+import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
-const Header = () => {
+
+const Header = (props) => {
+  const { currentUser } = props
   return (
     <div className='header'>
       <div className='header__wrap'>
@@ -13,17 +17,38 @@ const Header = () => {
         </div>
 
         <nav className='header__ctas'>
-          <ul>
-            <li>
-              <Link className='header__cta' to='/registration'>
-                Registro
-              </Link>
-            </li>
-          </ul>
+          {currentUser && (
+            <ul>
+              <li className='header__cta' onClick={() => auth.signOut()}>
+                <span>Cerrar Sesión</span>
+              </li>
+            </ul>
+          )}
+
+          {!currentUser && (
+            <ul>
+              <li>
+                <Link className='header__cta' to='/registration'>
+                  Registro
+                </Link>
+              </li>
+              <li>
+                <Link className='header__cta' to='/login'>
+                  Inicia Sesion
+                </Link>
+              </li>
+            </ul>
+          )}
         </nav>
       </div>
     </div>
   )
 }
+Header.defaulProps = {
+  currentUser: null
+}
+// const mapStateToProps = ({ user }) => ({
+//   user: user.currentUser
+// })
 
 export default Header
