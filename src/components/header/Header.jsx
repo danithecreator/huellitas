@@ -19,6 +19,11 @@ const Header = (props) => {
         <nav className='header__ctas'>
           {currentUser && (
             <ul>
+              <li>
+                <Link className='header__cta' to='/dashboard'>
+                  My Account
+                </Link>
+              </li>
               <li className='header__cta' onClick={() => auth.signOut()}>
                 <span>Cerrar Sesión</span>
               </li>

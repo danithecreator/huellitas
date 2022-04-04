@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
 import './SignIn.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Pets from '../../assets/catanddog.jpg'
 import Logo from '../../assets/logo.svg'
 import GoogleIcon from '../../assets/googleIcon.svg'
@@ -9,48 +9,37 @@ import FormInput from '../forms/formInput/FormInput'
 import { signInWhithGoogle, auth } from '../../firebase/utils'
 import AuthWrapper from '../authWrapper/AuthWrapper'
 
-const initialState = {
-  email: '',
-  password: ''
-}
 
-class SignIn extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      ...initialState
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
+const SignIn = props => {
 
-  handleSubmit = async (e) => {
-    e.preventDefault()
-    const { email, password } = this.state
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('')
+
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
 
     try {
-      await auth.signInWithEmailAndPassword(email, password)
-      this.setState({
-        ...initialState
-      })
+      await auth.signInWithEmailAndPassword(email, password);
+      resetForm();
+      props.history.push('/');
+      
     } catch (err) {
       console.log(err)
     }
   }
-  handleChange(e) {
-    const { name, value } = e.target
-    this.setState({
-      [name]: value
-    })
-  }
-  render() {
-    const { email, password } = this.setState
+
 
     return (
       <AuthWrapper>
         <div className='signin__formContainer signin__element'>
           <h2 className='signin__title'>Inicia Sesión</h2>
           <img className='signin__logo' src={Logo} alt='' />
-          <form className='signin__form' onSubmit={this.handleSubmit}>
+          <form className='signin__form' onSubmit={handleSubmit}>
             <FormInput
               styleclass='regInput'
               type='email'
@@ -58,7 +47,7 @@ class SignIn extends Component {
               value={email}
               label='Ingrese su email'
               placeholder='tuemai@email.com'
-              handleChange={this.handleChange}
+              handleChange={e => setEmail(e.target.value)}
             ></FormInput>
             <FormInput
               styleclass='regInput'
@@ -67,7 +56,7 @@ class SignIn extends Component {
               value={password}
               label='Ingrese su contraseña'
               placeholder='******'
-              handleChange={this.handleChange}
+              handleChange={e => setPassword(e.target.value)}
             ></FormInput>
             <div className='signin__links'>
               <Link to='/recovery'>¿Has olvidado la contraseña?</Link>
@@ -91,7 +80,7 @@ class SignIn extends Component {
         </div>
       </AuthWrapper>
     )
-  }
+  
 }
 
-export default SignIn
+export default withRouter(SignIn);

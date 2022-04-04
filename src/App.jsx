@@ -1,9 +1,13 @@
 import './App.css'
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { auth, handUserProfile } from './firebase/utils'
 import { setCurrentUser } from './redux/User/user.actions';
+
+//hoc
+import WithAuth from './hoc/withAuth';
+
 // Layouts
 import MainLayout from './layouts/MainLayout'
 // Pages
@@ -11,16 +15,15 @@ import Homepage from './pages/homepage/Homepage'
 import Registration from './pages/registration/Registration'
 import Login from './pages/login/Login'
 import Recovery from './pages/recovery/Recovery'
+import Dashboard from './pages/Dashboard';
 
-class App extends Component {
+const App = props => {
+ 
+  const {setCurrentUser, currentUser} = props;
 
-  authListener = null
-
-  componentDidMount() {
-
-    const {setCurrentUser} = this.props;
-
-    this.authListener = auth.onAuthStateChanged(async (userAuth) => {
+  useEffect(() => {
+      
+    const authListener = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await handUserProfile(userAuth)
         userRef.onSnapshot((snapshot) => {
@@ -33,13 +36,12 @@ class App extends Component {
      
       setCurrentUser(userAuth);
     })
-  }
-  componentWillUnmount() {
-    this.authListener()
-  }
 
-  render() {
-    const { currentUser } = this.props;
+    return () => {
+     authListener();
+    };
+  }, []);
+
     return (
       <div className='App'>
         <Switch>
@@ -55,9 +57,7 @@ class App extends Component {
           <Route
             path='/registration'
             render={() =>
-              currentUser ? (
-                <Redirect to='/' />
-              ) : (
+              (
                 <MainLayout>
                   <Registration></Registration>
                 </MainLayout>
@@ -67,9 +67,7 @@ class App extends Component {
           <Route
             path='/login'
             render={() =>
-              currentUser ? (
-                <Redirect to='/' />
-              ) : (
+              (
                 <MainLayout>
                   <Login></Login>
                 </MainLayout>
@@ -85,10 +83,21 @@ class App extends Component {
               </MainLayout>
             )}
           ></Route>
+
+          <Route
+            path='/dashboard'
+            render={() => (
+              <WithAuth>
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
+              </WithAuth>
+            )}
+          ></Route>
+
         </Switch>
       </div>
     )
-  }
 }
 
 const mapStateToProps = ({ user }) => ({

@@ -1,41 +1,33 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import './SingUp.css'
 import FormInput from '../forms/formInput/FormInput'
 import Button from '../forms/button/Button'
 import { auth, handUserProfile } from './../../firebase/utils'
 import AuthWrapper from '../authWrapper/AuthWrapper'
-const initialState = {
-  displayName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  errors: ''
-}
 
-class SingUp extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      ...initialState
-    }
-    this.handleChange = this.handleChange.bind(this)
+const SingUp = props => {
+
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setconfirmPassword] = useState('');
+  const [errors, setErrors] = useState([]);
+
+  const reset = () => {
+    setDisplayName('');
+    setEmail('');
+    setPassword('');
+    setconfirmPassword('');
+    setErrors([]);
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    this.setState({
-      [name]: value
-    })
-  }
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const { displayName, email, password, confirmPassword } = this.state
-
+    
     if (password !== confirmPassword) {
       const err = ['Las contraseñas no coinciden']
-      this.setState({
-        errors: err
-      })
+      setErrors(err);
       return
     }
     try {
@@ -46,16 +38,15 @@ class SingUp extends Component {
 
       await handUserProfile(user, { displayName })
 
-      this.setState({
-        ...initialState
-      })
+      reset();
+      props.history.push('/');
+
     } catch (err) {
       console.log(err)
     }
   }
 
-  render() {
-    const { displayName, email, password, confirmPassword, errors } = this.state
+
     return (
       <AuthWrapper size='authWrapper__reg'>
         <div className='signup__formContainer'>
@@ -75,7 +66,7 @@ class SingUp extends Component {
               })}
             </ul>
           )}
-          <form onSubmit={this.handleSubmit} className='signup__form'>
+          <form onSubmit={handleSubmit} className='signup__form'>
             <FormInput
               styleclass='regInput'
               type='text'
@@ -83,7 +74,7 @@ class SingUp extends Component {
               name='displayName'
               label='Ingrese su nombre completo'
               placeholder='Daniel'
-              handleChange={this.handleChange}
+              handleChange={e => setDisplayName(e.target.value)}
             ></FormInput>
             <FormInput
               styleclass='regInput'
@@ -92,7 +83,7 @@ class SingUp extends Component {
               name='email'
               label='Ingrese su email'
               placeholder='Daniel@email.com'
-              handleChange={this.handleChange}
+              handleChange={e => setEmail(e.target.value)}
             ></FormInput>
             <FormInput
               styleclass='regInput'
@@ -101,7 +92,7 @@ class SingUp extends Component {
               name='password'
               label='Ingrese su contraseña'
               placeholder='******'
-              handleChange={this.handleChange}
+              handleChange={e => setPassword(e.target.value)}
             ></FormInput>
             <FormInput
               styleclass='regInput'
@@ -110,7 +101,7 @@ class SingUp extends Component {
               name='confirmPassword'
               label='Confirme su contraseña'
               placeholder='******'
-              handleChange={this.handleChange}
+              handleChange={e => setconfirmPassword(e.target.value)}
             ></FormInput>
 
             <Button type='btnRegular'>Registrate</Button>
@@ -118,7 +109,6 @@ class SingUp extends Component {
         </div>
       </AuthWrapper>
     )
-  }
 }
 
-export default SingUp
+export default withRouter(SingUp);
