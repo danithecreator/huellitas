@@ -8,9 +8,8 @@ firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
-const GoogleProvider = new firebase.auth.GoogleAuthProvider()
+export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
 GoogleProvider.setCustomParameters({ prompt: 'select_account' })
-export const signInWhithGoogle = () => auth.signInWithPopup(GoogleProvider)
 
 export const handUserProfile = async (userAuth, additionalData) => {
   if (!userAuth) return

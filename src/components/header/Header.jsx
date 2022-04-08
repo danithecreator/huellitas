@@ -1,12 +1,16 @@
-import React from 'react';
-import './Header.css';
-import Logo from '../../assets/logo.svg';
-import { connect } from 'react-redux';
-import { auth } from '../../firebase/utils';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import './Header.css'
+import Logo from '../../assets/logo.svg'
+import { useSelector } from 'react-redux'
+import { auth } from '../../firebase/utils'
+import { Link } from 'react-router-dom'
+
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser
+})
 
 const Header = (props) => {
-  const { currentUser } = props
+  const { currentUser } = useSelector(mapState)
   return (
     <div className='header'>
       <div className='header__wrap'>
@@ -24,8 +28,8 @@ const Header = (props) => {
                   My Account
                 </Link>
               </li>
-              <li className='header__cta' onClick={() => auth.signOut()}>
-                <span>Cerrar Sesión</span>
+              <li onClick={() => auth.signOut()}>
+                <span className='header__cta'>Cerrar Sesión</span>
               </li>
             </ul>
           )}
@@ -53,8 +57,4 @@ Header.defaulProps = {
   currentUser: null
 }
 
- const mapStateToProps = ({ user }) => ({
-   currentUser: user.currentUser
- })
-
-export default connect(mapStateToProps, null)(Header);
+export default Header

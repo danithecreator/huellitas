@@ -1,19 +1,59 @@
-import userTypes from './user.types';
+import userTypes from './user.types'
 
 const INITIAL_STATE = {
-        currentUser: null
-};
+  currentUser: null,
+  signInSuccess: false,
+  signUpError: [],
+  signUpSuccess: false,
+  resetPasswordSuccess: false,
+  resetPasswordError: []
+}
 
-const userReducer = (state=INITIAL_STATE, action) => {
-    switch (action.type) {
-            case userTypes.SET_CURRENT_USER:
-                    return {
-                            ...state,
-                            currentUser: action.payload
-                    }
-            default:
-                    return state;
-    }
-}; 
+const userReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case userTypes.SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.payload
+      }
+    case userTypes.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        signInSuccess: action.payload
+      }
+    case userTypes.SIGN_UP_ERROR:
+      return {
+        ...state,
+        signUpError: action.payload
+      }
+    case userTypes.SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        signUpSuccess: action.payload
+      }
+    case userTypes.RESET_PASSWORD_SUCCES:
+      return {
+        ...state,
+        resetPasswordSuccess: action.payload
+      }
+    case userTypes.RESET_PASSWORD_ERROR:
+      return {
+        ...state,
+        resetPasswordError: action.payload
+      }
+    case userTypes.RESET_AUTH_FORMS:
+      return {
+        ...state,
+        signInSuccess: false,
+        signUpError: [],
+        signUpSuccess: false,
+        resetPasswordSuccess: false,
+        resetPasswordError: []
+      }
 
-export default userReducer;
+    default:
+      return state
+  }
+}
+
+export default userReducer
