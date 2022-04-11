@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUpUser, resetAllAuthForms } from '../../redux/User/user.actions'
-import { withRouter } from 'react-router-dom'
+import { signUpUserStart } from '../../redux/User/user.actions'
+import { useHistory } from 'react-router-dom'
 import './SingUp.css'
 import FormInput from '../forms/formInput/FormInput'
 import Button from '../forms/button/Button'
@@ -9,13 +9,14 @@ import Button from '../forms/button/Button'
 import AuthWrapper from '../authWrapper/AuthWrapper'
 
 const mapState = ({ user }) => ({
-  signUpSuccess: user.signUpSuccess,
-  signUpError: user.signUpError
+  currentUser: user.currentUser,
+  userErr: user.userErr
 })
 
 const SingUp = (props) => {
-  const { signUpSuccess, signUpError } = useSelector(mapState)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, userErr } = useSelector(mapState)
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,20 +24,19 @@ const SingUp = (props) => {
   const [errors, setErrors] = useState([])
 
   useEffect(() => {
-    if (signUpSuccess) {
-      reset()
-      dispatch(resetAllAuthForms())
-      props.history.push('/')
+    if (currentUser) {
+      reset();
+      history.push('/')
     }
-  }, [signUpSuccess])
+  }, [currentUser])
 
   useEffect(() => {
     console.log('hello1')
-    if (Array.isArray(signUpError) && signUpError.length > 0) {
-      setErrors(signUpError)
+    if (Array.isArray(userErr) && userErr.length > 0) {
+      setErrors(userErr)
       console.log('hello2')
     }
-  }, [signUpError])
+  }, [userErr])
 
   const reset = () => {
     setDisplayName('')
@@ -49,7 +49,7 @@ const SingUp = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(
-      signUpUser({
+      signUpUserStart({
         displayName,
         email,
         password,
@@ -122,4 +122,4 @@ const SingUp = (props) => {
   )
 }
 
-export default withRouter(SingUp)
+export default SingUp;

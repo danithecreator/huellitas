@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  signInUser,
-  signInWhithGoogle,
-  resetAllAuthForms
+  emailSignInStart,
+  googleSignInStart
 } from '../../redux/User/user.actions'
 import './SignIn.css'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Pets from '../../assets/catanddog.jpg'
 import Logo from '../../assets/logo.svg'
 import GoogleIcon from '../../assets/googleIcon.svg'
@@ -16,22 +15,22 @@ import FormInput from '../forms/formInput/FormInput'
 import AuthWrapper from '../authWrapper/AuthWrapper'
 
 const mapState = ({ user }) => ({
-  signInSuccess: user.signInSuccess
+  currentUser: user.currentUser
 })
 
 const SignIn = (props) => {
-  const { signInSuccess } = useSelector(mapState)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser } = useSelector(mapState)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   useEffect(() => {
-    if (signInSuccess) {
-      resetForm()
-      dispatch(resetAllAuthForms())
-      props.history.push('/')
+    if (currentUser) {
+      resetForm();
+      history.push('/');
     }
-  }, [signInSuccess])
+  }, [currentUser]);
 
   const resetForm = () => {
     setEmail('')
@@ -41,10 +40,10 @@ const SignIn = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    dispatch(signInUser({ email, password }))
+    dispatch(emailSignInStart({ email, password }))
   }
   const handleGoogleSignIn = () => {
-    dispatch(signInWhithGoogle())
+    dispatch(googleSignInStart());
   }
 
   return (
@@ -95,4 +94,4 @@ const SignIn = (props) => {
   )
 }
 
-export default withRouter(SignIn)
+export default SignIn;

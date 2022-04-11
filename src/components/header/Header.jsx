@@ -1,8 +1,8 @@
 import React from 'react'
 import './Header.css'
 import Logo from '../../assets/logo.svg'
-import { useSelector } from 'react-redux'
-import { auth } from '../../firebase/utils'
+import { useSelector, useDispatch } from 'react-redux'
+import { signOutUserStart } from '../../redux/User/user.actions'
 import { Link } from 'react-router-dom'
 
 const mapState = ({ user }) => ({
@@ -10,7 +10,13 @@ const mapState = ({ user }) => ({
 })
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState)
+
+  const signOut = () => {
+    dispatch(signOutUserStart());
+  };
+
   return (
     <div className='header'>
       <div className='header__wrap'>
@@ -28,7 +34,7 @@ const Header = (props) => {
                   My Account
                 </Link>
               </li>
-              <li onClick={() => auth.signOut()}>
+              <li onClick={() => signOut()}>
                 <span className='header__cta'>Cerrar Sesión</span>
               </li>
             </ul>
