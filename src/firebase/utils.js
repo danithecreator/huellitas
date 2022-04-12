@@ -20,12 +20,15 @@ export const handUserProfile = async ({ userAuth, additionalData }) => {
 
   if (!snapshot.exists) {
     const { displayName, email } = userAuth
-    const date = new Date()
+    const date = new Date();
+    const userRoles= ['user'];
+
     try {
       await userRef.set({
         displayName,
         email,
         createdDate: date,
+        userRoles,
         ...additionalData
       })
     } catch (err) {
