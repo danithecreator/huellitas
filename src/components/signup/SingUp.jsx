@@ -14,8 +14,8 @@ const mapState = ({ user }) => ({
 })
 
 const SingUp = (props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
   const { currentUser, userErr } = useSelector(mapState)
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
@@ -25,16 +25,14 @@ const SingUp = (props) => {
 
   useEffect(() => {
     if (currentUser) {
-      reset();
+      reset()
       history.push('/')
     }
   }, [currentUser])
 
   useEffect(() => {
-    console.log('hello1')
     if (Array.isArray(userErr) && userErr.length > 0) {
       setErrors(userErr)
-      console.log('hello2')
     }
   }, [userErr])
 
@@ -122,4 +120,4 @@ const SingUp = (props) => {
   )
 }
 
-export default SingUp;
+export default SingUp

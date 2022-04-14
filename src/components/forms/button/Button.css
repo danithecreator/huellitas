@@ -33,3 +33,33 @@
 .btnRegular:hover {
   background: #f3b26c;
 }
+.btnDashboard {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 10px;
+  background: #f6d2ab;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 2em;
+  font-size: 20px;
+  transition: all ease-in-out 200ms;
+  border-radius: 0;
+}
+.btnDashboard:hover {
+  background: #f3b26c;
+  transform: scale(1.1);
+}
+.btnTable {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 10px;
+  background: #f6d2ab;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  transition: all ease-in-out 200ms;
+  border-radius: 0;
+}
+.btnTable:hover {
+  background: #f3b26c;
+}

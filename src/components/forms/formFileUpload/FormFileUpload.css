@@ -1,0 +1,18 @@
+.uploadFile__container {
+  margin-top: 2em;
+  width: 100%;
+}
+.uploadFile__bar[value] {
+  width: 80%;
+  height: 20px;
+}
+input[type='file']::file-selector-button {
+  border: 1px solid black;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  background-color: #ffff;
+  transition: 0.3s;
+}
+input[type='file']::file-selector-button:hover {
+  background-color: #f6d2ab;
+}

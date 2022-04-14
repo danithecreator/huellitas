@@ -1,20 +1,20 @@
 import userTypes from './user.types'
 
-export const emailSignInStart = userCredentials => ({
+export const emailSignInStart = (userCredentials) => ({
   type: userTypes.EMAIL_SIGN_IN_START,
   payload: userCredentials
-});
+})
 
-export const sigInSuccess = user => ({
+export const sigInSuccess = (user) => ({
   type: userTypes.SIGN_IN_SUCCESS,
   payload: user
-});
+})
 
 export const checkUserSession = () => ({
   type: userTypes.CHECK_USER_SESSION
 })
 
-export const signOutUserStart =() => ({
+export const signOutUserStart = () => ({
   type: userTypes.SIGN_OUT_USER_START
 })
 
@@ -22,17 +22,22 @@ export const signOutUserSuccess = () => ({
   type: userTypes.SIGN_OUT_USER_SUCCESS
 })
 
-export const signUpUserStart = userCredentials => ({
+export const signUpUserStart = (userCredentials) => ({
   type: userTypes.SIGN_UP_USER_START,
   payload: userCredentials
 })
 
-export const userError = err => ({
+export const userError = (err) => ({
   type: userTypes.USER_ERROR,
   payload: err
 })
 
-export const resetPasswordStart = userCredentials => ({
+export const userSignInError = (err) => ({
+  type: userTypes.USER_SIGN_IN_ERROR,
+  payload: err
+})
+
+export const resetPasswordStart = (userCredentials) => ({
   type: userTypes.RESET_PASSWORD_START,
   payload: userCredentials
 })
@@ -43,8 +48,7 @@ export const resetPasswordSuccess = () => ({
 })
 
 export const resetUserState = () => ({
-  type: userTypes.RESET_USER_STATE,
-  
+  type: userTypes.RESET_USER_STATE
 })
 
 export const googleSignInStart = () => ({

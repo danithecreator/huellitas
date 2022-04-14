@@ -15,35 +15,44 @@ import FormInput from '../forms/formInput/FormInput'
 import AuthWrapper from '../authWrapper/AuthWrapper'
 
 const mapState = ({ user }) => ({
-  currentUser: user.currentUser
+  currentUser: user.currentUser,
+  userSignInError: user.userSignInError
 })
 
 const SignIn = (props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const { currentUser } = useSelector(mapState)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { currentUser, userSignInError } = useSelector(mapState)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState([])
 
   useEffect(() => {
     if (currentUser) {
-      resetForm();
-      history.push('/');
+      resetForm()
+      history.push('/')
     }
-  }, [currentUser]);
+  }, [currentUser])
+
+  useEffect(() => {
+    console.log('aqui', userSignInError)
+    if (Array.isArray(userSignInError) && userSignInError.length > 0) {
+      setErrors(userSignInError)
+    }
+  }, [userSignInError])
 
   const resetForm = () => {
     setEmail('')
     setPassword('')
+    setErrors([])
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     dispatch(emailSignInStart({ email, password }))
   }
   const handleGoogleSignIn = () => {
-    dispatch(googleSignInStart());
+    dispatch(googleSignInStart())
   }
 
   return (
@@ -51,6 +60,21 @@ const SignIn = (props) => {
       <div className='signin__formContainer signin__element'>
         <h2 className='signin__title'>Inicia Sesión</h2>
         <img className='signin__logo' src={Logo} alt='' />
+        {errors.length > 0 && (
+          <ul>
+            {errors.map((err, index) => {
+              return (
+                <li
+                  className='
+                  signup__error'
+                  key={index}
+                >
+                  {err}
+                </li>
+              )
+            })}
+          </ul>
+        )}
         <form className='signin__form' onSubmit={handleSubmit}>
           <FormInput
             styleclass='regInput'
@@ -94,4 +118,4 @@ const SignIn = (props) => {
   )
 }
 
-export default SignIn;
+export default SignIn

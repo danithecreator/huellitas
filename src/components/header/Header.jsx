@@ -10,12 +10,12 @@ const mapState = ({ user }) => ({
 })
 
 const Header = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { currentUser } = useSelector(mapState)
 
   const signOut = () => {
-    dispatch(signOutUserStart());
-  };
+    dispatch(signOutUserStart())
+  }
 
   return (
     <div className='header'>
@@ -31,11 +31,11 @@ const Header = (props) => {
             <ul>
               <li>
                 <Link className='header__cta' to='/dashboard'>
-                  My Account
+                  Mi cuenta
                 </Link>
               </li>
               <li onClick={() => signOut()}>
-                <span className='header__cta'>Cerrar Sesión</span>
+                <a className='header__cta'>Cerrar Sesión</a>
               </li>
             </ul>
           )}
