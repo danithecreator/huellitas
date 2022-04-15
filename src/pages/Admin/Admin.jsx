@@ -12,7 +12,7 @@ import Button from '../../components/forms/button/Button'
 import Modal from '../../components/modal/Modal'
 import FormTextArea from '../../components/forms/formTextArea/FormTextArea'
 import FormFileUpload from '../../components/forms/formFileUpload/FormFileUpload'
-
+import LoadMore from '../../components/LoadMore/LoadMore'
 import './admin.css'
 
 const mapState = ({ productsData }) => ({
@@ -21,6 +21,7 @@ const mapState = ({ productsData }) => ({
 
 const Admin = (props) => {
   const { products } = useSelector(mapState)
+  const { data, queryDoc, isLastPage } = products
   const dispatch = useDispatch()
   const [hideModal, setHideModal] = useState(true)
   const [productCategory, setProductCategory] = useState('alimento')
@@ -33,7 +34,8 @@ const Admin = (props) => {
   const [productBuyPrice, setProductBuyPrice] = useState('')
   const [productStock, setProductStock] = useState('')
   const [uploadValue, setUploadValue] = useState(0)
-  const [isUnable, setIsUnable] = useState(true)
+  const [petFilter, setPetFilter] = useState('')
+  const [catFilter, setCatFilter] = useState('')
   const [productErrors, setProductErrors] = useState([])
 
   useEffect(() => {
@@ -64,7 +66,8 @@ const Admin = (props) => {
     setProductDescription('')
     setProductPet('perro')
     setUploadValue(0)
-    setIsUnable(true)
+    setPetFilter('')
+    setCatFilter('')
     setProductErrors([])
   }
 
@@ -153,6 +156,20 @@ const Admin = (props) => {
       resetForm()
     }
   }
+  const handleLoadMore = () => {
+    dispatch(
+      dispatch(
+        fetchProductsStart({
+          startAfterDoc: queryDoc,
+          persistProducts: data
+        })
+      )
+    )
+  }
+
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore
+  }
 
   return (
     <div className='admin'>
@@ -184,6 +201,7 @@ const Admin = (props) => {
             <div className='addProduct__selectors'>
               <FormSelect
                 label='Tipo mascota'
+                selectStyle='formSelectBig'
                 options={[
                   {
                     value: 'perros',
@@ -198,6 +216,7 @@ const Admin = (props) => {
               />
               <FormSelect
                 label='Categoria'
+                selectStyle='formSelectBig'
                 options={[
                   {
                     value: 'alimento',
@@ -289,13 +308,57 @@ const Admin = (props) => {
       </Modal>
 
       <div className='manageProducts'>
+        <div className='manageProducts__header'>
+          <h1 className='manageProducts__title'>Administrar Productos</h1>
+          <FormSelect
+            label='Tipo mascota'
+            selectStyle='formSelectMid'
+            options={[
+              {
+                value: '',
+                name: 'Todos'
+              },
+              {
+                value: 'perros',
+                name: 'Perros'
+              },
+              {
+                value: 'gatos',
+                name: 'Gatos'
+              }
+            ]}
+            handleChange={(e) => setPetFilter(e.target.value)}
+          />
+          <FormSelect
+            label='Categoria'
+            selectStyle='formSelectMid'
+            options={[
+              {
+                value: '',
+                name: 'Todas'
+              },
+              {
+                value: 'alimento',
+                name: 'Alimento'
+              },
+              {
+                value: 'snacks',
+                name: 'Snacks'
+              },
+              {
+                value: 'cuidado',
+                name: 'Cuidado'
+              },
+              {
+                value: 'juguetes',
+                name: 'Juguetes'
+              }
+            ]}
+            handleChange={(e) => setCatFilter(e.target.value)}
+          />
+        </div>
         <table border='0' cellPadding='0' cellSpacing='0'>
           <tbody>
-            <tr>
-              <th>
-                <h1 className='manageProducts__title'>Administrar Productos</h1>
-              </th>
-            </tr>
             <tr>
               <td>
                 <table
@@ -314,9 +377,21 @@ const Admin = (props) => {
                       <th>Precio Venta</th>
                       <th>Stock</th>
                     </tr>
-                    {Array.isArray(products) &&
-                      products.length > 0 &&
-                      products.map((product, index) => {
+                    {Array.isArray(data) &&
+                      data.length > 0 &&
+                      (petFilter === '' && catFilter === ''
+                        ? data
+                        : data.filter(
+                            petFilter === '' && catFilter !== ''
+                              ? (product) =>
+                                  product.productCategory === catFilter
+                              : catFilter === ''
+                              ? (product) => product.productPet === petFilter
+                              : (product) =>
+                                  product.productPet === petFilter &&
+                                  product.productCategory === catFilter
+                          )
+                      ).map((product, index) => {
                         const {
                           productName,
                           productPet,
@@ -349,6 +424,16 @@ const Admin = (props) => {
                                 Eliminar
                               </Button>
                             </td>
+                            <td>
+                              <Button
+                                type='btnTable'
+                                onClick={() =>
+                                  dispatch(deleteProductStart(documentID))
+                                }
+                              >
+                                Editar
+                              </Button>
+                            </td>
                           </tr>
                         )
                       })}
@@ -358,6 +443,7 @@ const Admin = (props) => {
             </tr>
           </tbody>
         </table>
+        {!isLastPage && <LoadMore {...configLoadMore}></LoadMore>}
       </div>
     </div>
   )

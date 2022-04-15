@@ -52,12 +52,9 @@
 }
 
 .manageProducts h1 {
-  display: block;
-  width: 100%;
+  width: 50%;
   padding: 0;
-  margin: 0 auto 2rem;
-  font-size: 2rem;
-  line-height: 3.2rem;
+  font-size: 1.8rem;
   color: #000000;
   text-align: left;
   font-weight: 400;
@@ -67,9 +64,16 @@
 
 .manageProducts {
   text-transform: capitalize;
-
   width: 100%;
   padding: 1em;
+}
+.manageProducts__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4em;
 }
 .results {
   width: 100%;
@@ -82,7 +86,7 @@
   object-fit: cover;
   object-position: center;
   text-align: center;
-  width: 4em;
+  width: 1em;
 }
 .results__thumb img {
   width: 6em;

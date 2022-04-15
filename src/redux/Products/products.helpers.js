@@ -15,21 +15,40 @@ export const handleAddProduct = (product) => {
   })
 }
 
-export const handleFetchProducts = ({ filterByPet, filterByCat }) => {
+export const handleFetchProducts = ({
+  filterByPet,
+  filterByCat,
+  startAfterDoc,
+  persistProducts = []
+}) => {
   return new Promise((resolve, reject) => {
-    let ref = firestore.collection('products').orderBy('createdDate')
+    const pageSize = 6
+
+    let ref = firestore
+      .collection('products')
+      .orderBy('createdDate')
+      .limit(pageSize)
     if (filterByPet) ref = ref.where('productPet', '==', filterByPet)
     if (filterByCat) ref = ref.where('productCategory', '==', filterByCat)
+    if (startAfterDoc) ref = ref.startAfter(startAfterDoc)
     ref
       .get()
       .then((snapshot) => {
-        const productsArray = snapshot.docs.map((doc) => {
-          return {
-            ...doc.data(),
-            documentID: doc.id
-          }
+        const totalCount = snapshot.size
+        const data = [
+          ...persistProducts,
+          ...snapshot.docs.map((doc) => {
+            return {
+              ...doc.data(),
+              documentID: doc.id
+            }
+          })
+        ]
+        resolve({
+          data,
+          queryDoc: snapshot.docs[totalCount - 1],
+          isLastPage: totalCount < pageSize
         })
-        resolve(productsArray)
       })
       .catch((err) => {
         reject(err)

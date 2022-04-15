@@ -1,16 +1,42 @@
-.formRowSelect {
-  display: inline-block;
+.formSelectMid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
 
+  margin-left: 1em;
+}
+.formSelectMid label {
+  display: block;
+  margin-right: 20px;
+  text-align: left;
+}
+
+.formSelectMid select {
+  width: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 400;
+  text-align: left;
+  padding: 10px 20px;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.formSelectBig {
+  display: inline-block;
   margin-top: 1.5em;
   width: 100%;
 }
-.formRowSelect label {
+.formSelectBig label {
   display: block;
   width: 100%;
   text-align: left;
 }
 
-.formRowSelect select {
+.formSelectBig select {
   display: block;
   width: auto;
   float: left;

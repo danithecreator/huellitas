@@ -6,20 +6,16 @@ const FormSelect = ({
   defaultValue,
   handleChange,
   label,
+  selectStyle,
   ...otherProps
 }) => {
   if (!Array.isArray(options) || options.length < 1) return null
 
   return (
-    <div className='formRowSelect'>
+    <div className={selectStyle}>
       {label && <label>{label}</label>}
 
-      <select
-        className='formSelect'
-        value={defaultValue}
-        onChange={handleChange}
-        {...otherProps}
-      >
+      <select value={defaultValue} onChange={handleChange} {...otherProps}>
         {options.map((option, index) => {
           const { value, name } = option
 

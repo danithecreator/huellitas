@@ -1,7 +1,6 @@
 .productResult {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
   margin: 2em 0;
 }
@@ -18,4 +17,15 @@
   font-weight: 400;
   text-transform: uppercase;
   border-bottom: #d3d3d3;
+}
+.productResult__filters {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2em;
+}
+.productResult__store {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
 }

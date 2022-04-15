@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { fetchProductsStart } from '../../redux/Products/products.actions'
 import FormSelect from '../forms/formSelect/FormSelect'
+import LoadMore from '../LoadMore/LoadMore'
 import Product from './Product/Product'
 import './ProductResults.css'
 
@@ -16,6 +17,7 @@ function ProductResults() {
   const [productCategory, setProductCategory] = useState('')
   const { filterByPet, filterByCat } = useParams()
   const { products } = useSelector(mapState)
+  const { data, queryDoc, isLastPage } = products
   let petFilter
   let catFilter
 
@@ -34,8 +36,24 @@ function ProductResults() {
     setProductCategory(catFilter)
     history.push(`/search/${filterByPet}/${catFilter}`)
   }
+  const handleLoadMore = () => {
+    dispatch(
+      dispatch(
+        fetchProductsStart({
+          filterByPet,
+          filterByCat,
+          startAfterDoc: queryDoc,
+          persistProducts: data
+        })
+      )
+    )
+  }
 
-  if (!Array.isArray(products)) return null
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore
+  }
+
+  if (!Array.isArray(data)) return null
 
   const configFiltersByPet = {
     defaultValue: filterByPet,
@@ -81,12 +99,22 @@ function ProductResults() {
     ],
     handleChange: handleFilterByCat
   }
-  if (products.length < 1) {
+  if (data.length < 1) {
     return (
       <div className='productResult'>
-        <h1 className='productResult__title'>Browse products</h1>
-        <FormSelect {...configFiltersByPet}></FormSelect>
-        {filterByPet && <FormSelect {...configFiltersByCat}></FormSelect>}
+        <h1 className='productResult__title'>Encuentra todo para tu mascota</h1>
+        <div className='productResult__filters'>
+          <FormSelect
+            selectStyle='formSelectBig'
+            {...configFiltersByPet}
+          ></FormSelect>
+          {filterByPet && (
+            <FormSelect
+              selectStyle='formSelectBig'
+              {...configFiltersByCat}
+            ></FormSelect>
+          )}
+        </div>
 
         <h2>No se encontraron resultados</h2>
       </div>
@@ -95,26 +123,38 @@ function ProductResults() {
 
   return (
     <div className='productResult'>
-      <h1 className='productResult__title'>Browse products</h1>
-      <FormSelect {...configFiltersByPet}></FormSelect>
-      {filterByPet && <FormSelect {...configFiltersByCat}></FormSelect>}
+      <h1 className='productResult__title'>Encuentra todo para tu mascota</h1>
+      <div className='productResult__filters'>
+        <FormSelect
+          selectStyle='formSelectBig'
+          {...configFiltersByPet}
+        ></FormSelect>
+        {filterByPet && (
+          <FormSelect
+            selectStyle='formSelectBig'
+            {...configFiltersByCat}
+          ></FormSelect>
+        )}
+      </div>
+      <div className='productResult__store'>
+        {data.map((product, pos) => {
+          const { productThumbnail, productName, productSellPrice } = product
+          if (
+            !productThumbnail ||
+            !productName ||
+            typeof productSellPrice === undefined
+          )
+            return null
 
-      {products.map((product, pos) => {
-        const { productThumbnail, productName, productSellPrice } = product
-        if (
-          !productThumbnail ||
-          !productName ||
-          typeof productSellPrice === undefined
-        )
-          return null
-
-        const configProduct = {
-          productThumbnail,
-          productName,
-          productSellPrice
-        }
-        return <Product {...configProduct} key={pos}></Product>
-      })}
+          const configProduct = {
+            productThumbnail,
+            productName,
+            productSellPrice
+          }
+          return <Product {...configProduct} key={pos}></Product>
+        })}
+      </div>
+      {!isLastPage && <LoadMore {...configLoadMore}></LoadMore>}
     </div>
   )
 }
