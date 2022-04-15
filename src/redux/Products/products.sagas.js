@@ -4,9 +4,10 @@ import productsTypes from './products.types'
 import {
   handleAddProduct,
   handleFetchProducts,
-  handleDeleteProduct
+  handleDeleteProduct,
+  handleFetchProduct
 } from './products.helpers'
-import { fetchProductsStart, setProducts } from './products.actions'
+import { fetchProductsStart, setProducts, setProduct } from './products.actions'
 
 export function* addProduct({
   payload: {
@@ -71,10 +72,24 @@ export function* onDeleteProductStart() {
   yield takeLatest(productsTypes.DELETE_PRODUCT_START, deleteProduct)
 }
 
+export function* fetchProductStart({ payload }) {
+  try {
+    const product = yield handleFetchProduct(payload)
+    yield put(setProduct(product))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* onFetchProductStart() {
+  yield takeLatest(productsTypes.FETCH_PRODUCT_START, fetchProductStart)
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
     call(onFetchProductsStart),
-    call(onDeleteProductStart)
+    call(onDeleteProductStart),
+    call(onFetchProductStart)
   ])
 }

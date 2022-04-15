@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ShopDog from '../../assets/dog-hero.jpg'
 import ShopCat from '../../assets/cat-hero.jpg'
 import './Directory.css'
@@ -9,16 +10,16 @@ const Directory = () => {
         <div className='directory__item'>
           <div className='directory__overlay'></div>
           <img className='directory__image' src={ShopDog} alt='' />
-          <a className='directory__cta' href=''>
+          <Link className='directory__cta' to='/search/perros'>
             Perros
-          </a>
+          </Link>
         </div>
         <div className='directory__item'>
           <div className='directory__overlay'></div>
           <img className='directory__image' src={ShopCat} alt='' />
-          <a className='directory__cta' href='/'>
+          <Link className='directory__cta' to='/search/gatos'>
             Gatos
-          </a>
+          </Link>
         </div>
       </div>
     </div>
