@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { checkUserIsAdmin } from './../../utils'
+import { checkUserIsAdmin } from '../../Utils'
 import './adminToolbar.css'
 
 const mapState = ({ user }) => ({

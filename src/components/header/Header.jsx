@@ -1,6 +1,7 @@
 import React from 'react'
 import './Header.css'
 import Logo from '../../assets/logo.svg'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/User/user.actions'
 import { Link } from 'react-router-dom'
@@ -27,6 +28,21 @@ const Header = (props) => {
         </div>
 
         <nav className='header__ctas'>
+          <ul>
+            <li>
+              <Link className='header__cta' to='/search'>
+                Buscar
+              </Link>
+            </li>
+            <li>
+              <Link className='header__cta' to='/'>
+                Inicio
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div className='header__ctas'>
           {currentUser && (
             <ul>
               <li>
@@ -54,7 +70,7 @@ const Header = (props) => {
               </li>
             </ul>
           )}
-        </nav>
+        </div>
       </div>
     </div>
   )

@@ -20,6 +20,7 @@ import Login from './pages/login/Login'
 import Recovery from './pages/recovery/Recovery'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin/Admin'
+import Search from './pages/Search/Search'
 
 const App = (props) => {
   const dispatch = useDispatch()
@@ -38,6 +39,33 @@ const App = (props) => {
           render={() => (
             <MainLayout>
               <Homepage></Homepage>
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path='/search'
+          render={() => (
+            <MainLayout>
+              <Search></Search>
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path='/search/:filterByPet'
+          render={() => (
+            <MainLayout>
+              <Search></Search>
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path='/search/:filterByPet/:filterByCat'
+          render={() => (
+            <MainLayout>
+              <Search></Search>
             </MainLayout>
           )}
         />

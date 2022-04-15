@@ -45,9 +45,9 @@ export function* addProduct({
 export function* onAddProductStart() {
   yield takeLatest(productsTypes.ADD_NEW_PRODUCT_START, addProduct)
 }
-export function* fetchProducts() {
+export function* fetchProducts({ payload: { filterByPet, filterByCat } }) {
   try {
-    const products = yield handleFetchProducts()
+    const products = yield handleFetchProducts({ filterByPet, filterByCat })
     yield put(setProducts(products))
   } catch (error) {
     console.log(error)

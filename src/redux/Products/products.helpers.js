@@ -15,10 +15,12 @@ export const handleAddProduct = (product) => {
   })
 }
 
-export const handleFetchProducts = () => {
+export const handleFetchProducts = ({ filterByPet, filterByCat }) => {
   return new Promise((resolve, reject) => {
-    firestore
-      .collection('products')
+    let ref = firestore.collection('products').orderBy('createdDate')
+    if (filterByPet) ref = ref.where('productPet', '==', filterByPet)
+    if (filterByCat) ref = ref.where('productCategory', '==', filterByCat)
+    ref
       .get()
       .then((snapshot) => {
         const productsArray = snapshot.docs.map((doc) => {

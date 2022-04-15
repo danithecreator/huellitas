@@ -13,7 +13,7 @@ import Modal from '../../components/modal/Modal'
 import FormTextArea from '../../components/forms/formTextArea/FormTextArea'
 import FormFileUpload from '../../components/forms/formFileUpload/FormFileUpload'
 
-import './Admin.css'
+import './admin.css'
 
 const mapState = ({ productsData }) => ({
   products: productsData.products
@@ -54,7 +54,7 @@ const Admin = (props) => {
   }
   const resetForm = () => {
     setHideModal(true)
-    setProductCategory('mens')
+    setProductCategory('alimento')
     setProductName('')
     setProductThumbnail('')
     setProductSellPrice('')
@@ -186,12 +186,12 @@ const Admin = (props) => {
                 label='Tipo mascota'
                 options={[
                   {
-                    value: 'perro',
-                    name: 'Perro'
+                    value: 'perros',
+                    name: 'Perros'
                   },
                   {
-                    value: 'gato',
-                    name: 'Gato'
+                    value: 'gatos',
+                    name: 'Gatos'
                   }
                 ]}
                 handleChange={(e) => setProductPet(e.target.value)}

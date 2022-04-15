@@ -63,3 +63,18 @@
 .btnTable:hover {
   background: #f3b26c;
 }
+
+.btnCard {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 10px;
+  background: #f6d2ab;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  transition: all ease-in-out 200ms;
+  border-radius: 0;
+}
+.btnCard:hover {
+  background: #f3b26c;
+}
