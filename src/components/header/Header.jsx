@@ -51,7 +51,7 @@ const Header = (props) => {
                 </Link>
               </li>
               <li onClick={() => signOut()}>
-                <a className='header__cta'>Cerrar Sesión</a>
+                <a className='header__cta'>Cerrar Sesion</a>
               </li>
             </ul>
           )}

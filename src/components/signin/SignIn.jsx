@@ -19,7 +19,7 @@ const mapState = ({ user }) => ({
   userSignInError: user.userSignInError
 })
 
-const SignIn = (props) => {
+const SignIn = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { currentUser, userSignInError } = useSelector(mapState)
@@ -35,7 +35,6 @@ const SignIn = (props) => {
   }, [currentUser])
 
   useEffect(() => {
-    console.log('aqui', userSignInError)
     if (Array.isArray(userSignInError) && userSignInError.length > 0) {
       setErrors(userSignInError)
     }
@@ -58,7 +57,7 @@ const SignIn = (props) => {
   return (
     <AuthWrapper>
       <div className='signin__formContainer signin__element'>
-        <h2 className='signin__title'>Inicia Sesión</h2>
+        <h2 className='signin__title'>Inicia Sesion</h2>
         <img className='signin__logo' src={Logo} alt='' />
         {errors.length > 0 && (
           <ul>
@@ -84,6 +83,7 @@ const SignIn = (props) => {
             label='Ingrese su email'
             placeholder='tuemai@email.com'
             handleChange={(e) => setEmail(e.target.value)}
+            role='email'
           ></FormInput>
           <FormInput
             styleclass='regInput'
@@ -93,6 +93,7 @@ const SignIn = (props) => {
             label='Ingrese su contraseña'
             placeholder='******'
             handleChange={(e) => setPassword(e.target.value)}
+            role='password'
           ></FormInput>
           <div className='signin__links'>
             <Link to='/recovery'>¿Has olvidado la contraseña?</Link>
@@ -112,7 +113,7 @@ const SignIn = (props) => {
         </form>
       </div>
       <div className='signin__image signin__element'>
-        <img src={Pets} alt='imagen del formulario' />
+        <img src={Pets} alt='imagen del formulario' role='sideImg' />
       </div>
     </AuthWrapper>
   )

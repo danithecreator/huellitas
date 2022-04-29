@@ -15,12 +15,18 @@ const Product = (
     return null
   return (
     <div key={key} className='product'>
-      <Link to={`/product/${documentID}`}>
+      <Link to={`/product/${documentID}`} role='productCard'>
         <div className='product__imgContainer'>
-          <img className='product__img' src={productThumbnail} alt='' />
+          <img
+            className='product__img'
+            src={productThumbnail}
+            alt='product thumb'
+          />
         </div>
         <div className='product__detail'>
-          <p className='product__detailName'>{productName}</p>
+          <p className='product__detailName' data-testid='nameP'>
+            {productName}
+          </p>
           <p className='product__detailPrice'>${productSellPrice}</p>
         </div>
       </Link>
