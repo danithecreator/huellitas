@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 14
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run build
         run: npm run build
       - name: Run tests
@@ -27,4 +27,9 @@ jobs:
           command: npx cypress run
           start: npm run start-test
           wait-on: http://localhost:3000/
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HUELLITAS_E564F }}'
+          projectId: huellitas-e564f
   
