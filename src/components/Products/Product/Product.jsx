@@ -2,17 +2,34 @@ import React from 'react'
 import './Product.css'
 import { Link } from 'react-router-dom'
 import Button from '../../forms/button/Button'
-const Product = (
-  { productThumbnail, productName, productSellPrice, documentID },
-  key
-) => {
+import { useDispatch } from 'react-redux'
+import { addProduct } from './../../../redux/Cart/cart.actions'
+
+const Product = (product,key) => {
+
+  const dispatch = useDispatch();
+  const {
+    productThumbnail, 
+    productName,
+    productSellPrice,
+    documentID 
+  } = product;
+
   if (
     !documentID ||
     !productThumbnail ||
     !productName ||
     typeof productSellPrice === undefined
   )
-    return null
+    return null;
+
+    const handleAddToCart = (product) => {
+      if(!product) return ;
+      dispatch(
+        addProduct(product)
+      )
+    };
+
   return (
     <div key={key} className='product'>
       <Link to={`/product/${documentID}`} role='productCard'>
@@ -30,7 +47,9 @@ const Product = (
           <p className='product__detailPrice'>${productSellPrice}</p>
         </div>
       </Link>
-      <Button type='btnCard'>Agregar al Carrito</Button>
+      <Button type='btnCard' onClick={()=> handleAddToCart(product)}>
+        Agregar al Carrito
+        </Button>
     </div>
   )
 }

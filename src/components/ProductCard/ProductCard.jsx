@@ -6,6 +6,7 @@ import {
   fetchProductStart,
   setProduct
 } from '../../redux/Products/products.actions'
+import { addProduct } from './../../redux/Cart/cart.actions'
 import Button from '../forms/button/Button'
 
 const mapState = (state) => ({
@@ -31,6 +32,14 @@ function ProductCard() {
       dispatch(setProduct({}))
     }
   }, [])
+
+  const handleAddToCart = (product) => {
+    if(!product) return;
+    dispatch(
+      addProduct(product)
+    )
+  }
+
   return (
     <div className='productCard__container'>
       <div className='productCard__img'>
@@ -55,7 +64,9 @@ function ProductCard() {
           </div>
 
           <div className='productCard__btnCard'>
-            <Button type='btnRegular'>Agregar al carrito</Button>
+            <Button type='btnRegular' onClick={() => handleAddToCart(product)}>
+              Agregar al carrito
+            </Button>
           </div>
         </div>
       </div>

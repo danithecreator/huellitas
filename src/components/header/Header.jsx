@@ -4,15 +4,17 @@ import Logo from '../../assets/logo.svg'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/User/user.actions'
+import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
 import { Link } from 'react-router-dom'
 
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+  totalNumCartitems: selectCartItemsCount(state)
 })
 
 const Header = (props) => {
   const dispatch = useDispatch()
-  const { currentUser } = useSelector(mapState)
+  const { currentUser, totalNumCartitems } = useSelector(mapState)
 
   const signOut = () => {
     dispatch(signOutUserStart())
@@ -43,33 +45,41 @@ const Header = (props) => {
         </nav>
 
         <div className='header__ctas'>
-          {currentUser && (
-            <ul>
-              <li>
-                <Link className='header__cta' to='/dashboard'>
-                  Mi cuenta
-                </Link>
-              </li>
-              <li onClick={() => signOut()}>
-                <a className='header__cta'>Cerrar Sesion</a>
-              </li>
-            </ul>
-          )}
 
-          {!currentUser && (
-            <ul>
-              <li>
-                <Link className='header__cta' to='/registration'>
-                  Registro
-                </Link>
-              </li>
-              <li>
-                <Link className='header__cta' to='/login'>
-                  Inicia Sesion
-                </Link>
-              </li>
-            </ul>
-          )}
+          <ul>
+
+            <li>
+              <Link>
+                Tu carrito ({totalNumCartitems})
+              </Link>
+            </li>
+
+            {currentUser && [
+                <li>
+                  <Link className='header__cta' to='/dashboard'>
+                    Mi cuenta
+                  </Link>
+                </li>,
+                <li onClick={() => signOut()}>
+                  <a className='header__cta'>Cerrar Sesion</a>
+                </li>
+                 ]}
+
+            {!currentUser && [
+                <li>
+                  <Link className='header__cta' to='/registration'>
+                    Registro
+                  </Link>
+                </li>,
+                <li>
+                  <Link className='header__cta' to='/login'>
+                    Inicia Sesion
+                  </Link>
+                </li>
+            ]}
+          </ul>
+
+
         </div>
       </div>
     </div>
