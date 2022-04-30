@@ -1,7 +1,7 @@
 import SignIn from './SignIn'
 import React from 'react'
 import { render, screen, fireEvent } from '../../test-utils'
-import { userEvent } from '@testing-library/user-event'
+
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
@@ -17,6 +17,7 @@ describe('Testin the Sing In form', () => {
     component.getByText(/inicia sesion/i)
     component.getByText(/ingresa/i)
     component.getByText('¿Has olvidado la contraseña?')
+    component.getByText(/continuar con google/i)
     const sideImg = component.getByRole('sideImg')
     expect(sideImg).toHaveAttribute('alt', 'imagen del formulario')
   })
@@ -41,7 +42,20 @@ describe('Testin the Sing In form', () => {
 
     expect(userEmail.value).toBe('danigiraldo410@gmail.com')
     expect(userPassword.value).toBe('12345678')
-    expect(history.location.pathname).toBe('/')
     fireEvent.submit(button)
+    expect(history.location.pathname).toBe('/')
+  })
+
+  it('Should redirect to the "/" when the user sign in whit Google', () => {
+    const history = createMemoryHistory()
+    const component = render(
+      <Router history={history}>
+        <SignIn></SignIn>
+      </Router>
+    )
+    const googleButton = component.getByText(/continuar con google/i)
+    fireEvent.submit(googleButton)
+
+    expect(history.location.pathname).toBe('/')
   })
 })

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   addProductStart,
   fetchProductsStart,
-  deleteProductStart
+  deleteProductStart,
+  editProductStart
 } from '../../redux/Products/products.actions'
 import { storage } from '../../firebase/utils'
 import FormInput from '../../components/forms/formInput/FormInput'
@@ -24,6 +25,7 @@ const Admin = (props) => {
   const { data, queryDoc, isLastPage } = products
   const dispatch = useDispatch()
   const [hideModal, setHideModal] = useState(true)
+
   const [productCategory, setProductCategory] = useState('alimento')
   const [productPet, setProductPet] = useState('perro')
   const [productName, setProductName] = useState('')
@@ -37,13 +39,37 @@ const Admin = (props) => {
   const [petFilter, setPetFilter] = useState('')
   const [catFilter, setCatFilter] = useState('')
   const [productErrors, setProductErrors] = useState([])
+  const [editProduct, setEditProduct] = useState({})
+  const [isAdding, setIsAdding] = useState(false)
 
   useEffect(() => {
     dispatch(fetchProductsStart())
   }, [])
 
+  useEffect(() => {
+    changeInputValues()
+  }, [editProduct])
+
+  useEffect(() => {
+    if (isAdding) {
+      resetForm()
+    }
+  }, [isAdding])
+
   const toggleModal = () => {
     setHideModal(!hideModal), resetErrors()
+  }
+
+  const changeInputValues = () => {
+    if (Object.keys(editProduct).length !== 0) {
+      setProductName(editProduct.productName)
+      setProductThumbnail(editProduct.productThumbnail)
+      setProductSellPrice(editProduct.productSellPrice)
+      setProductBuyPrice(editProduct.productBuyPrice)
+      setProductBenefits(editProduct.productBenefits)
+      setProductStock(editProduct.productStock)
+      setProductDescription(editProduct.productDescription)
+    }
   }
 
   const configModal = {
@@ -55,7 +81,6 @@ const Admin = (props) => {
     setProductErrors([])
   }
   const resetForm = () => {
-    setHideModal(true)
     setProductCategory('alimento')
     setProductName('')
     setProductThumbnail('')
@@ -69,6 +94,7 @@ const Admin = (props) => {
     setPetFilter('')
     setCatFilter('')
     setProductErrors([])
+    setEditProduct({})
   }
 
   const handleUpload = (e) => {
@@ -132,7 +158,6 @@ const Admin = (props) => {
       }
     }
 
-    console.log(productErrors)
     return isValid
   }
 
@@ -140,20 +165,41 @@ const Admin = (props) => {
     e.preventDefault()
 
     if (invalidForm() === true) {
-      dispatch(
-        addProductStart({
-          productPet,
-          productCategory,
-          productName,
-          productBenefits,
-          productDescription,
-          productThumbnail,
-          productSellPrice,
-          productBuyPrice,
-          productStock
-        })
-      )
-      resetForm()
+      if (Object.keys(editProduct).length === 0) {
+        dispatch(
+          addProductStart({
+            productPet,
+            productCategory,
+            productName,
+            productBenefits,
+            productDescription,
+            productThumbnail,
+            productSellPrice,
+            productBuyPrice,
+            productStock
+          })
+        )
+        resetForm()
+        setHideModal(!hideModal)
+      } else {
+        console.log()
+        const documentID = editProduct.documentID
+        dispatch(
+          editProductStart({
+            productPet,
+            productCategory,
+            productName,
+            productBenefits,
+            productDescription,
+            productThumbnail,
+            productSellPrice,
+            productBuyPrice,
+            productStock,
+            documentID
+          })
+        )
+        setHideModal(!hideModal)
+      }
     }
   }
   const handleLoadMore = () => {
@@ -176,7 +222,12 @@ const Admin = (props) => {
       <div className='callToActions'>
         <ul>
           <li>
-            <Button type='btnDashboard' onClick={() => toggleModal()}>
+            <Button
+              type='btnDashboard'
+              onClick={() => {
+                toggleModal(), setIsAdding(true)
+              }}
+            >
               Añadir nuevo producto
             </Button>
           </li>
@@ -198,10 +249,11 @@ const Admin = (props) => {
             )
           })}
           <form className='addProduct__form' onSubmit={handleSubmit}>
-            <div className='addProduct__selectors'>
+            <div className='addProduct__row'>
               <FormSelect
                 label='Tipo mascota'
-                selectStyle='formSelectBig'
+                selectStyle='formSelectColum'
+                defaultValue={editProduct.productPet}
                 options={[
                   {
                     value: 'perros',
@@ -214,9 +266,11 @@ const Admin = (props) => {
                 ]}
                 handleChange={(e) => setProductPet(e.target.value)}
               />
+
               <FormSelect
                 label='Categoria'
-                selectStyle='formSelectBig'
+                selectStyle='formSelectColum'
+                defaultValue={editProduct.productCategory}
                 options={[
                   {
                     value: 'alimento',
@@ -238,70 +292,72 @@ const Admin = (props) => {
                 handleChange={(e) => setProductCategory(e.target.value)}
               />
             </div>
-            <div className='addProduct__formCols'>
-              <div className='addProduct__col'>
-                <FormInput
-                  label='Nombre'
-                  type='text'
-                  styleclass='difInput'
-                  value={productName}
-                  handleChange={(e) => setProductName(e.target.value)}
-                />
-                <FormTextArea
-                  label='Beneficios'
-                  type='text'
-                  styleclass='textArea'
-                  value={productBenefits}
-                  handleChange={(e) => setProductBenefits(e.target.value)}
-                />
-                <FormTextArea
-                  label='Descripcion'
-                  type='text'
-                  styleclass='textArea'
-                  value={productDescription}
-                  handleChange={(e) => setProductDescription(e.target.value)}
-                />
-              </div>
-              <div className='addProduct__col'>
-                <FormInput
-                  label='Precio Compra'
-                  type='number'
-                  styleclass='difInput'
-                  min='0'
-                  max='100000000'
-                  step='1'
-                  value={productBuyPrice}
-                  handleChange={(e) => setProductBuyPrice(e.target.value)}
-                />
+            <div className='addProduct__row'>
+              <FormInput
+                label='Nombre'
+                type='text'
+                styleclass='difInput'
+                value={productName}
+                handleChange={(e) => setProductName(e.target.value)}
+              />
 
-                <FormInput
-                  label='Precio Venta'
-                  type='number'
-                  styleclass='difInput'
-                  min='0'
-                  max='100000000'
-                  step='1'
-                  value={productSellPrice}
-                  handleChange={(e) => setProductSellPrice(e.target.value)}
-                />
-                <FormInput
-                  label='Cantidad en Stock'
-                  type='number'
-                  styleclass='difInput'
-                  min='0'
-                  max='100000000'
-                  step='1'
-                  value={productStock}
-                  handleChange={(e) => setProductStock(e.target.value)}
-                />
-                <FormFileUpload
-                  uploadValue={uploadValue}
-                  handleUpload={handleUpload}
-                />
-              </div>
+              <FormInput
+                label='Cantidad en Stock'
+                type='number'
+                styleclass='difInput'
+                min='0'
+                max='100000000'
+                step='1'
+                value={productStock}
+                handleChange={(e) => setProductStock(e.target.value)}
+              />
             </div>
 
+            <div className='addProduct__row'>
+              <FormInput
+                label='Precio Compra'
+                type='number'
+                styleclass='difInput'
+                min='0'
+                max='100000000'
+                step='1'
+                value={productBuyPrice}
+                handleChange={(e) => setProductBuyPrice(e.target.value)}
+              />
+              <FormInput
+                label='Precio Venta'
+                type='number'
+                styleclass='difInput'
+                min='0'
+                max='100000000'
+                step='1'
+                value={productSellPrice}
+                handleChange={(e) => setProductSellPrice(e.target.value)}
+              />
+            </div>
+
+            <FormTextArea
+              label='Beneficios'
+              type='text'
+              styleclass='textArea'
+              value={productBenefits}
+              handleChange={(e) => setProductBenefits(e.target.value)}
+            />
+            <FormTextArea
+              label='Descripcion'
+              type='text'
+              styleclass='textArea'
+              value={productDescription}
+              handleChange={(e) => setProductDescription(e.target.value)}
+            />
+
+            <FormFileUpload
+              uploadValue={uploadValue}
+              handleUpload={handleUpload}
+            />
+
             <br />
+
             <Button type='btnRegular'>Añadir Producto</Button>
           </form>
         </div>
@@ -427,9 +483,11 @@ const Admin = (props) => {
                             <td>
                               <Button
                                 type='btnTable'
-                                onClick={() =>
-                                  dispatch(deleteProductStart(documentID))
-                                }
+                                onClick={() => {
+                                  setEditProduct(product),
+                                    setIsAdding(false),
+                                    toggleModal()
+                                }}
                               >
                                 Editar
                               </Button>

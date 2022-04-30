@@ -3,9 +3,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 70%;
-
   margin-left: 1em;
+  width: 100%;
 }
 .formSelectMid label {
   display: block;
@@ -14,7 +13,7 @@
 }
 
 .formSelectMid select {
-  width: 50%;
+  width: 80%;
   font-size: 1.5rem;
   line-height: 1;
   font-weight: 400;
@@ -49,4 +48,14 @@
   border: none;
   outline: none;
   cursor: pointer;
+}
+.formSelectColum {
+  display: flex;
+  flex-direction: column;
+}
+.formSelectColum select {
+  padding: 0.6em;
+}
+.formSelectColum label {
+  margin-bottom: 5px;
 }

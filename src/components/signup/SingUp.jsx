@@ -84,6 +84,7 @@ const SingUp = (props) => {
             label='Ingrese su nombre completo'
             placeholder='Daniel'
             handleChange={(e) => setDisplayName(e.target.value)}
+            role='name'
           ></FormInput>
           <FormInput
             styleclass='regInput'
@@ -92,6 +93,7 @@ const SingUp = (props) => {
             name='email'
             label='Ingrese su email'
             placeholder='Daniel@email.com'
+            role='email'
             handleChange={(e) => setEmail(e.target.value)}
           ></FormInput>
           <FormInput
@@ -100,6 +102,7 @@ const SingUp = (props) => {
             value={password}
             name='password'
             label='Ingrese su contraseña'
+            role='password'
             placeholder='******'
             handleChange={(e) => setPassword(e.target.value)}
           ></FormInput>
@@ -109,11 +112,14 @@ const SingUp = (props) => {
             value={confirmPassword}
             name='confirmPassword'
             label='Confirme su contraseña'
+            role='confirm'
             placeholder='******'
             handleChange={(e) => setconfirmPassword(e.target.value)}
           ></FormInput>
 
-          <Button type='btnRegular'>Registrate</Button>
+          <Button role='submit' type='btnRegular'>
+            Registrate
+          </Button>
         </form>
       </div>
     </AuthWrapper>
