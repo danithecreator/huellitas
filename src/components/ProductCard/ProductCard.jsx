@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import './ProductCard.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchProductStart,
   setProduct
 } from '../../redux/Products/products.actions'
+import { addProduct } from './../../redux/Cart/cart.actions'
 import Button from '../forms/button/Button'
 
 const mapState = (state) => ({
@@ -14,6 +15,7 @@ const mapState = (state) => ({
 
 function ProductCard() {
   const dispatch = useDispatch()
+  const history = useHistory();
   const { productID } = useParams()
   const { product } = useSelector(mapState)
 
@@ -31,6 +33,15 @@ function ProductCard() {
       dispatch(setProduct({}))
     }
   }, [])
+
+  const handleAddToCart = (product) => {
+    if(!product) return;
+    dispatch(
+      addProduct(product)
+    );
+    history.push('/cart');
+  }
+
   return (
     <div className='productCard__container'>
       <div className='productCard__img'>
@@ -55,7 +66,9 @@ function ProductCard() {
           </div>
 
           <div className='productCard__btnCard'>
-            <Button type='btnRegular'>Agregar al carrito</Button>
+            <Button type='btnRegular' onClick={() => handleAddToCart(product)}>
+              Agregar al carrito
+            </Button>
           </div>
         </div>
       </div>
