@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './ProductCard.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchProductStart,
@@ -15,6 +15,7 @@ const mapState = (state) => ({
 
 function ProductCard() {
   const dispatch = useDispatch()
+  const history = useHistory();
   const { productID } = useParams()
   const { product } = useSelector(mapState)
 
@@ -37,7 +38,8 @@ function ProductCard() {
     if(!product) return;
     dispatch(
       addProduct(product)
-    )
+    );
+    history.push('/cart');
   }
 
   return (

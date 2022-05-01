@@ -22,6 +22,7 @@ import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin/Admin'
 import Search from './pages/Search/Search'
 import ProductDetails from './pages/ProductDetails/ProductDetails'
+import Cart from './pages/Cart/cart'
 const App = (props) => {
   const dispatch = useDispatch()
 
@@ -78,6 +79,17 @@ const App = (props) => {
             </MainLayout>
           )}
         />
+
+        <Route
+          exact
+          path='/cart'
+          render={() => (
+            <MainLayout>
+              <Cart />
+            </MainLayout>
+          )}
+        />
+
         <Route
           path='/registration'
           render={() => (
