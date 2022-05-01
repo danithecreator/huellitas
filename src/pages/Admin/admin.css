@@ -38,7 +38,9 @@
 .addProduct__selectors {
   display: flex;
   flex-direction: row;
-  width: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .addProduct__formCols {
   width: 100%;
@@ -46,9 +48,17 @@
   flex-direction: row;
   justify-content: space-around;
 }
-.addProduct__col {
-  width: 40%;
-  margin: 0 auto;
+.addProduct__row {
+  margin-bottom: 1em;
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  justify-content: center;
+}
+.addProduct__row div {
+  width: 100%;
+  margin-right: 1em;
 }
 
 .manageProducts h1 {

@@ -5,7 +5,8 @@ import {
   handleAddProduct,
   handleFetchProducts,
   handleDeleteProduct,
-  handleFetchProduct
+  handleFetchProduct,
+  handleEditProduct
 } from './products.helpers'
 import { fetchProductsStart, setProducts, setProduct } from './products.actions'
 
@@ -46,6 +47,46 @@ export function* addProduct({
 export function* onAddProductStart() {
   yield takeLatest(productsTypes.ADD_NEW_PRODUCT_START, addProduct)
 }
+
+export function* editProduct({
+  payload: {
+    productPet,
+    productCategory,
+    productName,
+    productBenefits,
+    productDescription,
+    productThumbnail,
+    productSellPrice,
+    productBuyPrice,
+    productStock,
+    documentID
+  }
+}) {
+  try {
+    yield handleEditProduct({
+      productPet,
+      productCategory,
+      productName,
+      productBenefits,
+      productDescription,
+      productThumbnail,
+      productSellPrice,
+      productBuyPrice,
+      productStock,
+      documentID
+    })
+
+    yield put(fetchProductsStart())
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* onEditProductStart() {
+  console.log('editing')
+  yield takeLatest(productsTypes.EDIT_PRODUCT_START, editProduct)
+}
+
 export function* fetchProducts({ payload }) {
   try {
     const products = yield handleFetchProducts(payload)
@@ -90,6 +131,7 @@ export default function* productsSagas() {
     call(onAddProductStart),
     call(onFetchProductsStart),
     call(onDeleteProductStart),
-    call(onFetchProductStart)
+    call(onFetchProductStart),
+    call(onEditProductStart)
   ])
 }

@@ -99,18 +99,19 @@ const SignIn = () => {
             <Link to='/recovery'>¿Has olvidado la contraseña?</Link>
           </div>
 
-          <Button type='btnRegular'>Ingresar</Button>
-
-          <p>Ó inicia sesión con</p>
-          <Button type='btnGoogle' onClick={handleGoogleSignIn}>
-            <div className='signin__googleButtonIcon'>
-              <img alt='Google sign-in' src={GoogleIcon} />
-            </div>
-            <div>
-              <p>Continuar con Google</p>
-            </div>
+          <Button id='signInButton' type='btnRegular'>
+            Ingresar
           </Button>
         </form>
+        <p>Ó inicia sesión con</p>
+        <Button type='btnGoogle' onClick={handleGoogleSignIn}>
+          <div className='signin__googleButtonIcon'>
+            <img alt='Google sign-in' src={GoogleIcon} />
+          </div>
+          <div>
+            <p>Continuar con Google</p>
+          </div>
+        </Button>
       </div>
       <div className='signin__image signin__element'>
         <img src={Pets} alt='imagen del formulario' role='sideImg' />

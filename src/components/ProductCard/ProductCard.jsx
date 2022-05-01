@@ -45,10 +45,12 @@ function ProductCard() {
   return (
     <div className='productCard__container'>
       <div className='productCard__img'>
-        <img src={productThumbnail} alt='' />
+        <img src={productThumbnail} alt='product image' role={'productImg'} />
       </div>
-      <div className='productCard__details'>
-        <h2 className='productCard__detailsTitle'> {productName}</h2>
+      <div className='productCard__details' role='details'>
+        <h2 className='productCard__detailsTitle' role='productName'>
+          {productName}
+        </h2>
         <div className='productCard__detailsPrice'>
           <span>Precio</span>
           <p>${productSellPrice}</p>
@@ -58,11 +60,11 @@ function ProductCard() {
           <h2>Información del producto</h2>
           <div>
             <h3>Beneficios</h3>
-            <p> {productBenefits}</p>
+            <p role='ben'> {productBenefits}</p>
           </div>
           <div>
             <h3>Caracteristicas</h3>
-            <p> {productDescription}</p>
+            <p role='des'> {productDescription}</p>
           </div>
 
           <div className='productCard__btnCard'>

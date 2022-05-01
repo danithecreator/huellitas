@@ -5,6 +5,11 @@ export const addProductStart = (productData) => ({
   payload: productData
 })
 
+export const editProductStart = (productData) => ({
+  type: productsTypes.EDIT_PRODUCT_START,
+  payload: productData
+})
+
 export const fetchProductsStart = (filters = {}) => ({
   type: productsTypes.FETCH_PRODUCTS_START,
   payload: filters

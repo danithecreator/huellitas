@@ -136,7 +136,7 @@ function ProductResults() {
           ></FormSelect>
         )}
       </div>
-      <div className='productResult__store'>
+      <div className='productResult__store' role='list'>
         {data.map((product, pos) => {
           const { productThumbnail, productName, productSellPrice } = product
           if (
