@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
 import './FormSelect.css'
 
 const FormSelect = ({
@@ -12,10 +13,15 @@ const FormSelect = ({
   if (!Array.isArray(options) || options.length < 1) return null
 
   return (
-    <div className={selectStyle}>
-      {label && <label>{label}</label>}
+    <div>
+      {label && <label className='mb-2'>{label}</label>}
 
-      <select value={defaultValue} onChange={handleChange} {...otherProps}>
+      <Form.Select
+        value={defaultValue}
+        onChange={handleChange}
+        {...otherProps}
+        className='mb-3'
+      >
         {options.map((option, index) => {
           const { value, name } = option
 
@@ -25,7 +31,7 @@ const FormSelect = ({
             </option>
           )
         })}
-      </select>
+      </Form.Select>
     </div>
   )
 }

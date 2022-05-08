@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
 import './FormInput.css'
 const FormInput = ({
   handleChange,
@@ -8,16 +9,10 @@ const FormInput = ({
   ...otherProps
 }) => {
   return (
-    <div className='formRow'>
-      {label && <label>{label}</label>}
-
-      <input
-        className={styleclass}
-        type={type}
-        onChange={handleChange}
-        {...otherProps}
-      />
-    </div>
+    <Form.Group className='mb-3 w-100'>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control type={type} onChange={handleChange} {...otherProps} />
+    </Form.Group>
   )
 }
 

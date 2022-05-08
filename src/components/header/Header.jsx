@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/User/user.actions'
 import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
 import { Link } from 'react-router-dom'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -21,68 +22,63 @@ const Header = (props) => {
   }
 
   return (
-    <div className='header'>
-      <div className='header__wrap'>
-        <div className='header__logo'>
-          <Link to='/'>
-            <img src={Logo} alt='logo de la tienda' />
-          </Link>
-        </div>
-
-        <nav className='header__ctas'>
-          <ul>
-            <li>
-              <Link className='header__cta' to='/search'>
-                Buscar
-              </Link>
-            </li>
-            <li>
+    <Navbar bg='light' expand='lg' className='header shadow-sm'>
+      <Container>
+        <Navbar.Brand>
+          <div className='header__logo'>
+            <Link to='/'>
+              <img src={Logo} alt='logo de la tienda' />
+            </Link>
+          </div>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='me-auto'>
+            <Nav.Link>
               <Link className='header__cta' to='/'>
                 Inicio
               </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <div className='header__ctas'>
-
-          <ul>
-
-            <li>
-              <Link to="/cart">
+            </Nav.Link>
+            <Nav.Link>
+              <Link className='header__cta' to='/search'>
+                Buscar
+              </Link>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link>
+              <Link to='/cart' className='header__cta'>
                 Tu carrito ({totalNumCartitems})
               </Link>
-            </li>
-
+            </Nav.Link>
             {currentUser && [
-                <li>
-                  <Link className='header__cta' to='/dashboard'>
-                    Mi cuenta
-                  </Link>
-                </li>,
+              <Nav.Link eventKey={2}>
+                <Link className='header__cta' to='/dashboard'>
+                  Mi cuenta
+                </Link>
+              </Nav.Link>,
+              <Nav.Link eventKey={3}>
                 <li onClick={() => signOut()}>
                   <a className='header__cta'>Cerrar Sesion</a>
                 </li>
-                 ]}
-
-            {!currentUser && [
-                <li>
-                  <Link className='header__cta' to='/registration'>
-                    Registro
-                  </Link>
-                </li>,
-                <li>
-                  <Link className='header__cta' to='/login'>
-                    Inicia Sesion
-                  </Link>
-                </li>
+              </Nav.Link>
             ]}
-          </ul>
-
-
-        </div>
-      </div>
-    </div>
+            {!currentUser && [
+              <Nav.Link eventKey={2}>
+                <Link className='header__cta' to='/registration'>
+                  Registro
+                </Link>
+              </Nav.Link>,
+              <Nav.Link eventKey={3}>
+                <Link className='header__cta' to='/login'>
+                  Inicia Sesion
+                </Link>
+              </Nav.Link>
+            ]}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 }
 Header.defaulProps = {

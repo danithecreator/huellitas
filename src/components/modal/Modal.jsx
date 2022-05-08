@@ -7,7 +7,7 @@ const Modal = ({ hideModal, toggleModal, children }) => {
   return [
     <div className='modalOverlay' onClick={() => toggleModal()} />,
     <div className='modalWrap'>
-      <div className='modal'>{children}</div>
+      <div className='modalContainer'>{children}</div>
     </div>
   ]
 }

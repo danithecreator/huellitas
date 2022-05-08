@@ -1,17 +1,10 @@
 .signup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-.signup_container {
-  width: 500px;
-  display: flex;
-  flex-direction: row;
-  border-radius: 20px;
+  width: 50%;
   background: #ffffff;
   box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+.signup_container {
+  padding: 2em 0;
 }
 
 .signup__formContainer {
@@ -35,4 +28,10 @@
   padding: 0.3em 2em;
 
   color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+  .signup {
+    width: 100%;
+  }
 }

@@ -37,7 +37,7 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 export function* emailSignIn({ payload: { email, password } }) {
   const errors = []
   if (email.length <= 0 || email.trim() === '') {
-    errors.push('Ingrese su emaila')
+    errors.push('Ingrese su email')
   }
   if (password.length <= 0) {
     errors.push('Ingrese su contraseña')

@@ -32,15 +32,15 @@ describe('The app render whitout problems', function () {
     { defaultCommandTimeout: 10000 },
     function () {
       cy.contains('Buscar').click()
-      cy.contains('Natural Toys')
-      cy.contains('$13000')
-      cy.get('#76z2KHXUTMa8OH65snog').click()
+      cy.contains('ZeeDog Super Orange - Naranja')
+      cy.contains('$35000')
+      cy.get('#eshI7Ch2Q5isFjAI1yWE').click()
       cy.contains(
-        'Son blandas para su fácil digestión; con una alta palatividad, preparados y horneados muy cuidadosamente. Tu mascota tiene que el verdadero sabor natural.'
+        'A tu perro le encantará nuestro juguete para perros Super Orange. ¡Durables, resistentes y muy divertidos, diseñamos todos nuestros juguetes para perros Super Fruit con un fondo dispensador de golosinas para recordarle que los rellene con golosinas saludables! ¡Sí, saludable!'
       )
       cy.url().should(
         'eq',
-        'http://localhost:3000/product/76z2KHXUTMa8OH65snog'
+        'http://localhost:3000/product/eshI7Ch2Q5isFjAI1yWE'
       )
     }
   )

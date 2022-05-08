@@ -4,17 +4,13 @@ import { Link, useHistory } from 'react-router-dom'
 import Button from '../../forms/button/Button'
 import { useDispatch } from 'react-redux'
 import { addProduct } from './../../../redux/Cart/cart.actions'
+import { Card } from 'react-bootstrap'
 
-const Product = (product,key) => {
-
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const {
-    productThumbnail, 
-    productName,
-    productSellPrice,
-    documentID 
-  } = product;
+const Product = (product, key) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { productThumbnail, productName, productSellPrice, documentID } =
+    product
 
   if (
     !documentID ||
@@ -22,37 +18,39 @@ const Product = (product,key) => {
     !productName ||
     typeof productSellPrice === undefined
   )
-    return null;
+    return null
 
-    const handleAddToCart = (product) => {
-      if(!product) return ;
-      dispatch(
-        addProduct(product)
-      );
-      history.push('/cart');
-    };
+  const handleAddToCart = (product) => {
+    if (!product) return
+    dispatch(addProduct(product))
+    history.push('/cart')
+  }
 
   return (
-    <div key={key} className='product'>
+    <Card className='product pt-3'>
       <Link to={`/product/${documentID}`} id={documentID} role='productCard'>
-        <div className='product__imgContainer'>
-          <img
-            className='product__img'
+        <div className='d-flex align-content-center justify-content-center '>
+          <Card.Img
+            variant='top'
+            className='product__img '
             src={productThumbnail}
             alt='product thumb'
           />
         </div>
-        <div className='product__detail'>
-          <p className='product__detailName' data-testid='nameP'>
-            {productName}
-          </p>
-          <p className='product__detailPrice'>${productSellPrice}</p>
-        </div>
+        <Card.Body>
+          <Card.Title>
+            <p className='product__detailName' data-testid='nameP'>
+              {productName}
+            </p>
+          </Card.Title>
+          <Card.Text className='mb-3 '>${productSellPrice}</Card.Text>
+        </Card.Body>
       </Link>
-      <Button type='btnCard' onClick={()=> handleAddToCart(product)}>
+
+      <Button type='btnCard' onClick={() => handleAddToCart(product)}>
         Agregar al Carrito
-        </Button>
-    </div>
+      </Button>
+    </Card>
   )
 }
 

@@ -83,7 +83,6 @@ export function* editProduct({
 }
 
 export function* onEditProductStart() {
-  console.log('editing')
   yield takeLatest(productsTypes.EDIT_PRODUCT_START, editProduct)
 }
 

@@ -13,6 +13,7 @@ import Button from '../forms/button/Button'
 import FormInput from '../forms/formInput/FormInput'
 
 import AuthWrapper from '../authWrapper/AuthWrapper'
+import { Alert, Col, Container, Row } from 'react-bootstrap'
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -55,8 +56,78 @@ const SignIn = () => {
   }
 
   return (
-    <AuthWrapper>
-      <div className='signin__formContainer signin__element'>
+    <Container className=' mt-5 signin'>
+      <Row>
+        <Col
+          lg={6}
+          className='d-flex flex-column align-items-center signin_container'
+        >
+          <h2 className='signin__title'>Inicia Sesion</h2>
+          <img className='signin__logo' src={Logo} alt='' />
+          <div className='w-75'>
+            {errors.length > 0 && (
+              <ul>
+                {errors.map((err, index) => {
+                  return (
+                    <Alert key={index} variant='danger'>
+                      {err}
+                    </Alert>
+                  )
+                })}
+              </ul>
+            )}
+          </div>
+
+          <form className='signin__form w-100 m' onSubmit={handleSubmit}>
+            <div className='w-100 pe-5 ps-5'>
+              <FormInput
+                type='email'
+                name='email'
+                value={email}
+                label='Ingrese su email'
+                placeholder='tuemai@email.com'
+                handleChange={(e) => setEmail(e.target.value)}
+                role='email'
+              ></FormInput>
+              <FormInput
+                type='password'
+                name='password'
+                value={password}
+                label='Ingrese su contraseña'
+                placeholder='******'
+                handleChange={(e) => setPassword(e.target.value)}
+                role='password'
+              ></FormInput>
+            </div>
+
+            <div className='signin__links'>
+              <Link to='/recovery'>¿Has olvidado la contraseña?</Link>
+            </div>
+            <Button id='signInButton' type='btnRegular'>
+              Ingresar
+            </Button>
+          </form>
+          <p className='mb-3'>Ó inicia sesión con</p>
+          <Button type='btnGoogle' onClick={handleGoogleSignIn}>
+            <div className='signin__googleButtonIcon'>
+              <img alt='Google sign-in' src={GoogleIcon} />
+            </div>
+            <div>
+              <p>Continuar con Google</p>
+            </div>
+          </Button>
+        </Col>
+        <Col
+          lg={6}
+          className='signin__image signin__element d-none d-lg-block p-0'
+        >
+          <img src={Pets} alt='imagen del formulario' role='sideImg' />
+        </Col>
+      </Row>
+    </Container>
+  )
+  {
+    /* <div className='signin__formContainer signin__element'>
         <h2 className='signin__title'>Inicia Sesion</h2>
         <img className='signin__logo' src={Logo} alt='' />
         {errors.length > 0 && (
@@ -115,9 +186,8 @@ const SignIn = () => {
       </div>
       <div className='signin__image signin__element'>
         <img src={Pets} alt='imagen del formulario' role='sideImg' />
-      </div>
-    </AuthWrapper>
-  )
+      </div> */
+  }
 }
 
 export default SignIn

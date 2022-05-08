@@ -1,21 +1,13 @@
 .signin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-.signin_container {
-  width: 1000px;
-  display: flex;
-  flex-direction: row;
-  border-radius: 50px;
+  width: 75%;
   background: #ffffff;
   box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
 }
+.signin_container {
+  padding: 2em 0;
+}
 
 .signin__formContainer {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +16,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 .form__input {
   width: 70%;
@@ -58,7 +49,7 @@
   width: 50%;
 }
 .signin__image img {
-  border-radius: 0 50px 50px 0;
+  width: 100%;
 }
 .signin__emailButton {
   width: 70%;
@@ -99,6 +90,7 @@
 .signin__title {
   margin-top: 1em;
   font-size: 2rem;
+  text-align: center;
 }
 .signin__links {
   width: 70%;
@@ -113,4 +105,19 @@
 }
 .signin__links a:hover {
   color: #f3b26c;
+}
+.mobileLayout {
+  text-align: center;
+}
+
+/* @media (min-width: 576px) {
+  .signin {
+    width: 100%;
+  }
+} */
+
+@media (max-width: 991.98px) {
+  .signin {
+    width: 100%;
+  }
 }

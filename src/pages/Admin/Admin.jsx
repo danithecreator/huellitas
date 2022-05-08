@@ -15,6 +15,7 @@ import FormTextArea from '../../components/forms/formTextArea/FormTextArea'
 import FormFileUpload from '../../components/forms/formFileUpload/FormFileUpload'
 import LoadMore from '../../components/LoadMore/LoadMore'
 import './admin.css'
+import { Col, Row, Table } from 'react-bootstrap'
 
 const mapState = ({ productsData }) => ({
   products: productsData.products
@@ -69,6 +70,8 @@ const Admin = (props) => {
       setProductBenefits(editProduct.productBenefits)
       setProductStock(editProduct.productStock)
       setProductDescription(editProduct.productDescription)
+      setProductCategory(editProduct.productCategory)
+      setProductPet(editProduct.productPet)
     }
   }
 
@@ -204,12 +207,10 @@ const Admin = (props) => {
   }
   const handleLoadMore = () => {
     dispatch(
-      dispatch(
-        fetchProductsStart({
-          startAfterDoc: queryDoc,
-          persistProducts: data
-        })
-      )
+      fetchProductsStart({
+        startAfterDoc: queryDoc,
+        persistProducts: data
+      })
     )
   }
 
@@ -218,21 +219,8 @@ const Admin = (props) => {
   }
 
   return (
-    <div className='admin'>
-      <div className='callToActions'>
-        <ul>
-          <li>
-            <Button
-              type='btnDashboard'
-              onClick={() => {
-                toggleModal(), setIsAdding(true)
-              }}
-            >
-              Añadir nuevo producto
-            </Button>
-          </li>
-        </ul>
-      </div>
+    <div className='admin container'>
+      <h1 className='mb-5'>Administrar Productos</h1>
 
       <Modal {...configModal}>
         <div className='addProduct__formContainer'>
@@ -248,93 +236,103 @@ const Admin = (props) => {
               </li>
             )
           })}
-          <form className='addProduct__form' onSubmit={handleSubmit}>
-            <div className='addProduct__row'>
-              <FormSelect
-                label='Tipo mascota'
-                selectStyle='formSelectColum'
-                defaultValue={editProduct.productPet}
-                options={[
-                  {
-                    value: 'perros',
-                    name: 'Perros'
-                  },
-                  {
-                    value: 'gatos',
-                    name: 'Gatos'
-                  }
-                ]}
-                handleChange={(e) => setProductPet(e.target.value)}
-              />
+          <form className='container w-100' onSubmit={handleSubmit}>
+            <Row>
+              <Col lg={6} sm={12} className=' '>
+                <FormSelect
+                  label='Tipo mascota'
+                  selectStyle='formSelectColum'
+                  defaultValue={productPet}
+                  options={[
+                    {
+                      value: 'perros',
+                      name: 'Perros'
+                    },
+                    {
+                      value: 'gatos',
+                      name: 'Gatos'
+                    }
+                  ]}
+                  handleChange={(e) => setProductPet(e.target.value)}
+                />
+              </Col>
+              <Col lg={6} sm={12} className=''>
+                <FormSelect
+                  label='Categoria'
+                  selectStyle='formSelectColum'
+                  defaultValue={productCategory}
+                  options={[
+                    {
+                      value: 'alimento',
+                      name: 'Alimento'
+                    },
+                    {
+                      value: 'snacks',
+                      name: 'Snacks'
+                    },
+                    {
+                      value: 'cuidado',
+                      name: 'Cuidado e Higiene'
+                    },
+                    {
+                      value: 'juguetes',
+                      name: 'Juguetes'
+                    }
+                  ]}
+                  handleChange={(e) => setProductCategory(e.target.value)}
+                />
+              </Col>
+            </Row>
 
-              <FormSelect
-                label='Categoria'
-                selectStyle='formSelectColum'
-                defaultValue={editProduct.productCategory}
-                options={[
-                  {
-                    value: 'alimento',
-                    name: 'Alimento'
-                  },
-                  {
-                    value: 'snacks',
-                    name: 'Snacks'
-                  },
-                  {
-                    value: 'cuidado',
-                    name: 'Cuidado e Higiene'
-                  },
-                  {
-                    value: 'juguetes',
-                    name: 'Juguetes'
-                  }
-                ]}
-                handleChange={(e) => setProductCategory(e.target.value)}
-              />
-            </div>
-            <div className='addProduct__row'>
-              <FormInput
-                label='Nombre'
-                type='text'
-                styleclass='difInput'
-                value={productName}
-                handleChange={(e) => setProductName(e.target.value)}
-              />
-
-              <FormInput
-                label='Cantidad en Stock'
-                type='number'
-                styleclass='difInput'
-                min='0'
-                max='100000000'
-                step='1'
-                value={productStock}
-                handleChange={(e) => setProductStock(e.target.value)}
-              />
-            </div>
-
-            <div className='addProduct__row'>
-              <FormInput
-                label='Precio Compra'
-                type='number'
-                styleclass='difInput'
-                min='0'
-                max='100000000'
-                step='1'
-                value={productBuyPrice}
-                handleChange={(e) => setProductBuyPrice(e.target.value)}
-              />
-              <FormInput
-                label='Precio Venta'
-                type='number'
-                styleclass='difInput'
-                min='0'
-                max='100000000'
-                step='1'
-                value={productSellPrice}
-                handleChange={(e) => setProductSellPrice(e.target.value)}
-              />
-            </div>
+            <Row className=''>
+              <Col lg={6} sm={12} className=' '>
+                <FormInput
+                  label='Nombre'
+                  type='text'
+                  styleclass='difInput'
+                  value={productName}
+                  handleChange={(e) => setProductName(e.target.value)}
+                />
+              </Col>
+              <Col lg={6} sm={12} className=' '>
+                <FormInput
+                  label='Cantidad en Stock'
+                  type='number'
+                  styleclass='difInput'
+                  min='0'
+                  max='100000000'
+                  step='1'
+                  value={productStock}
+                  handleChange={(e) => setProductStock(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6} sm={12} className=' '>
+                <FormInput
+                  label='Precio Compra'
+                  type='number'
+                  styleclass='difInput'
+                  min='0'
+                  max='100000000'
+                  step='1'
+                  value={productBuyPrice}
+                  handleChange={(e) => setProductBuyPrice(e.target.value)}
+                />
+              </Col>
+              <Col lg={6} sm={12} className=' '>
+                <FormInput
+                  label='Precio Venta'
+                  type='number'
+                  styleclass='difInput'
+                  min='0'
+                  max='100000000'
+                  step='1'
+                  value={productSellPrice}
+                  handleChange={(e) => setProductSellPrice(e.target.value)}
+                />
+              </Col>
+            </Row>
 
             <FormTextArea
               label='Beneficios'
@@ -358,70 +356,86 @@ const Admin = (props) => {
 
             <br />
 
-            <Button type='btnRegular'>Añadir Producto</Button>
+            {isAdding ? (
+              <Button type='btnRegular'>Añadir Producto</Button>
+            ) : (
+              <Button type='btnRegular'>Editar Producto</Button>
+            )}
           </form>
         </div>
       </Modal>
 
-      <div className='manageProducts'>
-        <div className='manageProducts__header'>
-          <h1 className='manageProducts__title'>Administrar Productos</h1>
-          <FormSelect
-            label='Tipo mascota'
-            selectStyle='formSelectMid'
-            options={[
-              {
-                value: '',
-                name: 'Todos'
-              },
-              {
-                value: 'perros',
-                name: 'Perros'
-              },
-              {
-                value: 'gatos',
-                name: 'Gatos'
-              }
-            ]}
-            handleChange={(e) => setPetFilter(e.target.value)}
-          />
-          <FormSelect
-            label='Categoria'
-            selectStyle='formSelectMid'
-            options={[
-              {
-                value: '',
-                name: 'Todas'
-              },
-              {
-                value: 'alimento',
-                name: 'Alimento'
-              },
-              {
-                value: 'snacks',
-                name: 'Snacks'
-              },
-              {
-                value: 'cuidado',
-                name: 'Cuidado'
-              },
-              {
-                value: 'juguetes',
-                name: 'Juguetes'
-              }
-            ]}
-            handleChange={(e) => setCatFilter(e.target.value)}
-          />
-        </div>
-        <table border='0' cellPadding='0' cellSpacing='0'>
+      <div className=''>
+        <Row className='container m-0'>
+          <Col lg={4}>
+            <FormSelect
+              label='Tipo mascota'
+              options={[
+                {
+                  value: '',
+                  name: 'Todos'
+                },
+                {
+                  value: 'perros',
+                  name: 'Perros'
+                },
+                {
+                  value: 'gatos',
+                  name: 'Gatos'
+                }
+              ]}
+              handleChange={(e) => setPetFilter(e.target.value)}
+            />
+          </Col>
+          <Col s lg={4}>
+            <FormSelect
+              label='Categoria'
+              options={[
+                {
+                  value: '',
+                  name: 'Todas'
+                },
+                {
+                  value: 'alimento',
+                  name: 'Alimento'
+                },
+                {
+                  value: 'snacks',
+                  name: 'Snacks'
+                },
+                {
+                  value: 'cuidado',
+                  name: 'Cuidado'
+                },
+                {
+                  value: 'juguetes',
+                  name: 'Juguetes'
+                }
+              ]}
+              handleChange={(e) => setCatFilter(e.target.value)}
+            />
+          </Col>
+          <Col lg={4}>
+            <Button
+              type='btnDashboard'
+              onClick={() => {
+                toggleModal(), setIsAdding(true)
+              }}
+            >
+              Añadir nuevo producto
+            </Button>
+          </Col>
+        </Row>
+        <Table border='0' cellPadding='0' cellSpacing='0' responsive>
           <tbody>
             <tr>
               <td>
-                <table
+                <Table
                   className='results'
                   border='0'
                   cellPadding='10'
                   cellSpacing='0'
+                  responsive
                 >
                   <tbody>
                     <tr className='results__header'>
@@ -496,11 +510,11 @@ const Admin = (props) => {
                         )
                       })}
                   </tbody>
-                </table>
+                </Table>
               </td>
             </tr>
           </tbody>
-        </table>
+        </Table>
         {!isLastPage && <LoadMore {...configLoadMore}></LoadMore>}
       </div>
     </div>

@@ -3,7 +3,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 
 function ProductDetails() {
   return (
-    <div>
+    <div className=''>
       <ProductCard />
     </div>
   )

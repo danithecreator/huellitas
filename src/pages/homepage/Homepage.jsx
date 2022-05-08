@@ -3,7 +3,7 @@ import Directory from '../../components/directory/Directory'
 import './Homepage.css'
 const Homepage = () => {
   return (
-    <section className='homepage'>
+    <section className='container'>
       <Directory></Directory>
     </section>
   )

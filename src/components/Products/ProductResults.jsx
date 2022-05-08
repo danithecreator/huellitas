@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Col, Row, Stack } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { fetchProductsStart } from '../../redux/Products/products.actions'
@@ -103,17 +104,22 @@ function ProductResults() {
     return (
       <div className='productResult'>
         <h1 className='productResult__title'>Encuentra todo para tu mascota</h1>
-        <div className='productResult__filters'>
-          <FormSelect
-            selectStyle='formSelectBig'
-            {...configFiltersByPet}
-          ></FormSelect>
-          {filterByPet && (
+        <div className='productResult__filters row'>
+          <div className='col-lg-4'>
+            {' '}
             <FormSelect
               selectStyle='formSelectBig'
-              {...configFiltersByCat}
+              {...configFiltersByPet}
             ></FormSelect>
-          )}
+          </div>
+          <div className='col-lg-4'>
+            {filterByPet && (
+              <FormSelect
+                selectStyle='formSelectBig'
+                {...configFiltersByCat}
+              ></FormSelect>
+            )}
+          </div>
         </div>
 
         <h2>No se encontraron resultados</h2>
@@ -124,19 +130,25 @@ function ProductResults() {
   return (
     <div className='productResult'>
       <h1 className='productResult__title'>Encuentra todo para tu mascota</h1>
-      <div className='productResult__filters'>
-        <FormSelect
-          selectStyle='formSelectBig'
-          {...configFiltersByPet}
-        ></FormSelect>
-        {filterByPet && (
+      <div className='productResult__filters row'>
+        <div className='col-lg-4'>
+          {' '}
           <FormSelect
             selectStyle='formSelectBig'
-            {...configFiltersByCat}
+            {...configFiltersByPet}
           ></FormSelect>
-        )}
+        </div>
+        <div className='col-lg-4'>
+          {filterByPet && (
+            <FormSelect
+              selectStyle='formSelectBig'
+              {...configFiltersByCat}
+            ></FormSelect>
+          )}
+        </div>
       </div>
-      <div className='productResult__store' role='list'>
+
+      <Row xs={1} md={2} lg={3} className='g-4 mb-5' role='list'>
         {data.map((product, pos) => {
           const { productThumbnail, productName, productSellPrice } = product
           if (
@@ -149,9 +161,14 @@ function ProductResults() {
           const configProduct = {
             ...product
           }
-          return <Product {...configProduct} key={pos}></Product>
+          return (
+            <Col>
+              <Product {...configProduct} key={pos}></Product>
+            </Col>
+          )
         })}
-      </div>
+      </Row>
+
       {!isLastPage && <LoadMore {...configLoadMore}></LoadMore>}
     </div>
   )

@@ -1,7 +1,7 @@
 .formRow {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   margin-top: 1.5em;
 }
 .regInput {
@@ -22,7 +22,7 @@
 .difInput {
   width: 100%;
   padding: 0.2em;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .difInput:focus {
   outline: none;

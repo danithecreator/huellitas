@@ -3,7 +3,7 @@ import ProductResults from '../../components/Products/ProductResults'
 
 function Search() {
   return (
-    <div className='searchPage'>
+    <div className='container'>
       <ProductResults></ProductResults>
     </div>
   )

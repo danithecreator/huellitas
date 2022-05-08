@@ -1,8 +1,18 @@
-.container {
-    margin:0 auto;
-    text-align: center;
-}
+/* .container {
+  margin: 0 auto;
+  text-align: center;
+} */
 
 .cartBtn {
-    cursor: pointer;
+  background-color: #f3b26c;
+  border: #f3b26c;
+  cursor: pointer;
+}
+.cartBtn:hover {
+  background-color: #ec9538;
+}
+
+.cartBtn:focus {
+  background-color: #f3b26c;
+  box-shadow: none;
 }

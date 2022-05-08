@@ -5,7 +5,7 @@ const MainLayout = (props) => {
   return (
     <div className='fullHeight'>
       <Header {...props}> </Header>
-      <div className='main'>{props.children}</div>
+      <div className=''>{props.children}</div>
       <Footer></Footer>
     </div>
   )

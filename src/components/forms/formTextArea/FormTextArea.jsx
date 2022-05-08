@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
 import './FormTextArea.css'
 
 const FormTextArea = ({
@@ -9,16 +10,26 @@ const FormTextArea = ({
   ...otherProps
 }) => {
   return (
-    <div className='formRowArea'>
-      {label && <label>{label}</label>}
+    // <div className='formRowArea'>
+    //   {label && <label>{label}</label>}
 
-      <textarea
-        className={styleclass}
-        type={type}
+    //   <textarea
+    //     className={styleclass}
+    //     type={type}
+    //     onChange={handleChange}
+    //     {...otherProps}
+    //   />
+    // </div>
+
+    <Form.Group className='mb-3'>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        as='textarea'
+        rows={3}
         onChange={handleChange}
         {...otherProps}
       />
-    </div>
+    </Form.Group>
   )
 }
 
