@@ -23,6 +23,8 @@ import Admin from './pages/Admin/Admin'
 import Search from './pages/Search/Search'
 import ProductDetails from './pages/ProductDetails/ProductDetails'
 import Cart from './pages/Cart/cart'
+import Payment from './pages/Payment/payment';
+
 const App = (props) => {
   const dispatch = useDispatch()
 
@@ -89,6 +91,14 @@ const App = (props) => {
             </MainLayout>
           )}
         />
+
+        <Route path="/payment" render={() => (
+          <WithAuth>
+            <MainLayout>
+              <Payment />
+            </MainLayout>
+          </WithAuth>
+        )}/>
 
         <Route
           path='/registration'

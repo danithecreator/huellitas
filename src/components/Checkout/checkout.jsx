@@ -39,7 +39,7 @@ const Checkout = ({}) => {
         >
           Seguir comprando
         </Button>
-        <Button className='cartBtn'>Verificar</Button>
+        <Button onClick={()=> history.push('/payment')}  className='cartBtn'>Verificar</Button>
       </section>
     </div>
 
