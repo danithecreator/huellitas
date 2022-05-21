@@ -1,6 +1,6 @@
-import SignIn from './SignIn'
+import SignIn from '../components/signin/SignIn'
 import React from 'react'
-import { render, screen, fireEvent } from '../../test-utils'
+import { render, screen, fireEvent } from '../test-utils'
 
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'

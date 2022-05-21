@@ -1,6 +1,6 @@
-import SingUp from './SingUp'
+import SingUp from '../components/signup/SingUp'
 import React from 'react'
-import { render, screen, fireEvent } from '../../test-utils'
+import { render, screen, fireEvent } from '../test-utils'
 
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'

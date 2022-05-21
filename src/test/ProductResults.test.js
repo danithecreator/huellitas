@@ -1,5 +1,5 @@
-import ProductResults from './ProductResults'
-import { render, screen, fireEvent } from '../../test-utils'
+import ProductResults from '../components/Products/ProductResults'
+import { render, screen, fireEvent } from '../test-utils'
 
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'

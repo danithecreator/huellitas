@@ -1,5 +1,5 @@
-import Header from './Header'
-import { render, screen, fireEvent } from '../../test-utils'
+import Header from '../components/header/Header'
+import { render, screen, fireEvent } from '../test-utils'
 import userEvent from '@testing-library/user-event'
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'

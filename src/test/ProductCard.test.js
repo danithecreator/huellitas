@@ -1,5 +1,5 @@
-import ProductCard from './ProductCard'
-import { render, screen, fireEvent } from '../../test-utils'
+import ProductCard from '../components/ProductCard/ProductCard'
+import { render, screen, fireEvent } from '../test-utils'
 
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'

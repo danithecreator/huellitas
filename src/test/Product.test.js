@@ -1,6 +1,6 @@
 import React from 'react'
-import Product from './Product'
-import { render, screen, fireEvent } from '../../../test-utils'
+import Product from '../components/Products/Product/Product'
+import { render, screen, fireEvent } from '../test-utils'
 import { Router, BrowserRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
