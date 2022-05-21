@@ -21,11 +21,16 @@ jobs:
         run: npm run build
       - name: Run tests
         run: npm run test
-     
+      - name: E2E tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npx cypress run
+          start: npm run start-test
+          wait-on: http://localhost:3000/
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: http://localhost:9000 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
