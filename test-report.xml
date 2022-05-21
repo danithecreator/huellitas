@@ -1,3 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\Product.test.js">
+    <testCase name="Testing the product component Should render the product whitout problems" duration="95"/>
+    <testCase name="Testing the product component Should redirect the user to the detail of the product e.g(/product/BUyVOxU8L2ZH6RIhWIF9) when this one click the product card" duration="24"/>
+  </file>
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\SignUp.test.js">
+    <testCase name="Testin the Sing Up form Should render the Sign Up form whitout errors" duration="58"/>
+    <testCase name="Testin the Sing Up form Should redirecto to &quot;/&quot;" duration="72"/>
+  </file>
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\ProductResults.test.js">
+    <testCase name="Testing the product result page Should render the page whitout problems" duration="143"/>
+  </file>
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\ProductCard.test.js">
+    <testCase name="Testing the product card Should render the product card whitout problems " duration="154"/>
+  </file>
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\SignIn.test.js">
+    <testCase name="Testin the Sing In form Should render the Sign In form whitout errors" duration="119"/>
+    <testCase name="Testin the Sing In form Should redirect to the &quot;/&quot; when the form submit has all inputs  validate and the user its register in the DB" duration="70"/>
+    <testCase name="Testin the Sing In form Should redirect to the &quot;/&quot; when the user sign in whit Google" duration="9"/>
+  </file>
+  <file path="C:\Users\danie\Documents\Universidad\Software\Proyecto\huellitas\src\test\Header.test.js">
+    <testCase name="Testing the header Should render the header whitout errors" duration="210"/>
+    <testCase name="Testing the header Should redirect to /login when clicking the &quot;Inicia Sesion&quot; link" duration="25"/>
+    <testCase name="Testing the header Should redirect to /registration when clicking the &quot;Registro&quot; link" duration="11"/>
+    <testCase name="Testing the header Should redirect to /search when clicking the &quot;Buscar&quot; link" duration="11"/>
+    <testCase name="Testing the header Should redirect to / when clicking the &quot;Inicio&quot; link" duration="11"/>
+    <testCase name="Testing the header Should change the link from &quot;Inicia Sesion&quot; to &quot;Cerrar Sesion&quot; " duration="10"/>
+    <testCase name="Testing the header Should appear the link for access my account call &quot;Mi Cuenta&quot; " duration="7"/>
+  </file>
 </testExecutions>
