@@ -35,7 +35,8 @@
     "test:e2e": "cypress run",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sonarqube": "sonar-scanner"
   },
   "browserslist": {
     "production": [
@@ -56,6 +57,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.4",
-    "prettier": "^2.6.1"
+    "jest-sonar-reporter": "^2.0.0",
+    "prettier": "^2.6.1",
+    "sonar-scanner": "^3.1.0"
   }
 }
