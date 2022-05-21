@@ -2,5 +2,5 @@ projectKey=sonar-huellitas-key
 serverUrl=http://localhost:9000
 serverVersion=9.4.0.54424
 dashboardUrl=http://localhost:9000/dashboard?id=sonar-huellitas-key
-ceTaskId=AYDnJlsRc1O9m7MY8QxL
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYDnJlsRc1O9m7MY8QxL
+ceTaskId=AYDnmhidc1O9m7MY8QxM
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYDnmhidc1O9m7MY8QxM
