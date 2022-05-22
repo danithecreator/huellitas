@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { addProduct } from './../../../redux/Cart/cart.actions'
 import { Card } from 'react-bootstrap'
 
-const Product = (product, key) => {
+const Product = (product, _key) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { productThumbnail, productName, productSellPrice, documentID } =

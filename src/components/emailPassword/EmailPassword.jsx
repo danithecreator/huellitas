@@ -12,7 +12,7 @@ const mapState = ({ user }) => ({
   userErr: user.userErr
 })
 
-const EmailPassword = (props) => {
+const EmailPassword = (_props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { resetPasswordSuccess, userErr } = useSelector(mapState)

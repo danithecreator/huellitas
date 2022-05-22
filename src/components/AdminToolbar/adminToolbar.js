@@ -8,7 +8,7 @@ const mapState = ({ user }) => ({
   currentUser: user.currentUser
 })
 
-const AdminToolbar = (props) => {
+const AdminToolbar = (_props) => {
   const { currentUser } = useSelector(mapState)
 
   const isAdmin = checkUserIsAdmin(currentUser)

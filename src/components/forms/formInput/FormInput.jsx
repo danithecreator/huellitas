@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 import './FormInput.css'
 const FormInput = ({
   handleChange,
-  styleclass,
+  _styleclass,
   label,
   type,
   ...otherProps

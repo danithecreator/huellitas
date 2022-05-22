@@ -25,7 +25,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails'
 import Cart from './pages/Cart/cart'
 import Payment from './pages/Payment/payment';
 
-const App = (props) => {
+const App = (_props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
