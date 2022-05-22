@@ -6,7 +6,6 @@ import './SingUp.css'
 import FormInput from '../forms/formInput/FormInput'
 import Button from '../forms/button/Button'
 
-import AuthWrapper from '../authWrapper/AuthWrapper'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const mapState = ({ user }) => ({
