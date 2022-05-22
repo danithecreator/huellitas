@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Dashboard= props => {
+const Dashboard= _props => {
     return (
         <h1>
             Your logged in!

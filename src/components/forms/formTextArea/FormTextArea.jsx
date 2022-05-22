@@ -4,9 +4,9 @@ import './FormTextArea.css'
 
 const FormTextArea = ({
   handleChange,
-  styleclass,
+  _styleclass,
   label,
-  type,
+  _type,
   ...otherProps
 }) => {
   return (

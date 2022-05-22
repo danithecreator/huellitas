@@ -13,7 +13,7 @@ const mapState = (state) => ({
   totalNumCartitems: selectCartItemsCount(state)
 })
 
-const Header = (props) => {
+const Header = (_props) => {
   const dispatch = useDispatch()
   const { currentUser, totalNumCartitems } = useSelector(mapState)
 

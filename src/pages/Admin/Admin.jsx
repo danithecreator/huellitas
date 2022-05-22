@@ -21,7 +21,7 @@ const mapState = ({ productsData }) => ({
   products: productsData.products
 })
 
-const Admin = (props) => {
+const Admin = (_props) => {
   const { products } = useSelector(mapState)
   const { data, queryDoc, isLastPage } = products
   const dispatch = useDispatch()

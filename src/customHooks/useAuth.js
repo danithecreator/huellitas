@@ -6,7 +6,7 @@ const mapState = ({ user }) => ({
     currentUser: user.currentUser
 })
 
-const useAuth = props => {
+const useAuth = _props => {
     const { currentUser } = useSelector(mapState);
     const history = useHistory();
 

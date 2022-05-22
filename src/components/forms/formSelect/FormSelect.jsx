@@ -7,7 +7,7 @@ const FormSelect = ({
   defaultValue,
   handleChange,
   label,
-  selectStyle,
+  _selectStyle,
   ...otherProps
 }) => {
   if (!Array.isArray(options) || options.length < 1) return null
