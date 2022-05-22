@@ -2,7 +2,7 @@ import React from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import ClearIcon from '@mui/icons-material/Clear'
 import RemoveIcon from '@mui/icons-material/Remove'
-import { Col, Row, Table } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import './item.css'
 import { useDispatch } from 'react-redux'
 import {

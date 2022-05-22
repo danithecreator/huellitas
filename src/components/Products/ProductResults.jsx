@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Row, Stack } from 'react-bootstrap'
+import { Col, Row} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { fetchProductsStart } from '../../redux/Products/products.actions'

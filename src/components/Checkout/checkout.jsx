@@ -7,10 +7,10 @@ import {
 } from '../../redux/Cart/cart.selectors'
 import { createStructuredSelector } from 'reselect'
 import './checkout.css'
-//import Button from './../forms/button/Button';
+
 import Item from './Item/item'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Table from 'react-bootstrap/Table'
+
 import { Button } from 'react-bootstrap'
 
 const mapState = createStructuredSelector({
@@ -22,8 +22,7 @@ const Checkout = ({}) => {
   const history = useHistory()
   const { carItems, total } = useSelector(mapState)
 
-  const errMsg = 'No hay productos en el carrito'
-
+  
   return (
     <div className='container'>
       <h1 className='mt-3 mb-5'>Carrito</h1>
