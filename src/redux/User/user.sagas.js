@@ -30,7 +30,7 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
       })
     )
   } catch (err) {
-    //  console.log(err);
+      console.log(err);
   }
 }
 
@@ -64,7 +64,7 @@ export function* isUserAuthenticated() {
     if (!userAuth) return
     yield getSnapshotFromUserAuth(userAuth)
   } catch (err) {
-    //  console.log(err);
+      console.log(err);
   }
 }
 
@@ -77,7 +77,7 @@ export function* signOutUser() {
     yield auth.signOut()
     yield put(signOutUserSuccess())
   } catch (err) {
-    //console.log(err);
+    console.log(err);
   }
 }
 
