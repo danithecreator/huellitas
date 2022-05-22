@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import FormInput from './../forms/formInput/FormInput';
-import Button from './../forms/button/Button';
-import './payment.css';
-import { selectCartTotal, selectCartItemsCount} from './../../redux/Cart/cart.selectors';
-import { clearCart } from './../../redux/Cart/cart.actions'; 
+import FormInput from '../forms/formInput/FormInput';
+
+
+import { selectCartItemsCount} from '../../redux/Cart/cart.selectors';
+import { clearCart } from '../../redux/Cart/cart.actions'; 
 import { createStructuredSelector } from "reselect";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -14,13 +14,13 @@ const initialAddresState = {
 };
 
 const mapState = createStructuredSelector({
-    total: selectCartTotal,
+
     itemCount: selectCartItemsCount
 });
 
 const PaymentDetails = () => {
     const history= useHistory();
-    const { total, itemCount } = useSelector(mapState);
+    const { itemCount } = useSelector(mapState);
     const dispatch = useDispatch();
     const [billingAddress, setBillingAddress] = useState({ ...initialAddresState });
     const [shippingAddress, setShippingAddress] = useState({ ...initialAddresState });
