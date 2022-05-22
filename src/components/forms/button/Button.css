@@ -44,7 +44,6 @@
   margin-bottom: 2em;
   font-size: 20px;
   transition: all ease-in-out 200ms;
-  border-radius: 0;
 }
 .btnDashboard:hover {
   background: #f3b26c;
@@ -59,7 +58,6 @@
   border: none;
   font-size: 20px;
   transition: all ease-in-out 200ms;
-  border-radius: 0;
 }
 .btnTable:hover {
   background: #f3b26c;
@@ -74,7 +72,6 @@
   border: none;
   font-size: 20px;
   transition: all ease-in-out 200ms;
-  border-radius: 0;
 }
 .btnCard:hover {
   background: #f3b26c;

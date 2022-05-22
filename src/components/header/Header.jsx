@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutUserStart } from '../../redux/User/user.actions'
 import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
 import { Link } from 'react-router-dom'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Container, Nav, Navbar } from 'react-bootstrap'
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,

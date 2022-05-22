@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, ProgressBar } from 'react-bootstrap'
 import './FormFileUpload.css'
 function FormFileUpload({ handleUpload, uploadValue }) {
