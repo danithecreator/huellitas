@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SingUp from '../../components/signup/SingUp'
-import './Registration.css'
+
 
 class Registration extends Component {
   render() {
