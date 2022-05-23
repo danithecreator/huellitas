@@ -499,8 +499,8 @@ const Admin = (_props) => {
                                 type='btnTable'
                                 onClick={() => {
                                   setEditProduct(product),
-                                    setIsAdding(false),
-                                    toggleModal()
+                                    setIsAdding(false)
+                          
                                 }}
                               >
                                 Editar
