@@ -154,7 +154,7 @@ const PaymentDetails = () => {
               <FormInput
                 type='tel'
                 name='number'
-                placeholder='Card Number'
+                placeholder='Numero de la tarjeta'
                 value={number}
                 onChange={(e) => {
                   const { value } = e.target
@@ -166,7 +166,7 @@ const PaymentDetails = () => {
               <FormInput
                 type='text'
                 name='name'
-                placeholder='Name'
+                placeholder='Nombre en la tarjeta'
                 value={nameOnCard}
                 onChange={(e) => setNameOncard(e.target.value)}
                 onFocus={(e) => setFocus(e.target.name)}
@@ -175,7 +175,7 @@ const PaymentDetails = () => {
               <FormInput
                 type='text'
                 name='expiry'
-                placeholder='MM/YY Expiry'
+                placeholder='Fecha de expiracion'
                 value={expiry}
                 onChange={(e) => {
                   const { value } = e.target
@@ -187,7 +187,7 @@ const PaymentDetails = () => {
               <FormInput
                 type='tel'
                 name='cvc'
-                placeholder='CVC'
+                placeholder='CVV'
                 value={cvc}
                 onChange={(e) => {
                   const { value } = e.target
