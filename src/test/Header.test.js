@@ -14,7 +14,7 @@ describe('Testing the header', () => {
       </BrowserRouter>
     )
     component.getByText(/inicio/i)
-    component.getByText(/buscar/i)
+    component.getByText(/ver productos/i)
     component.getByText(/registro/i)
     component.getByText(/inicia sesion/i)
     const logo = component.getByRole('img')
@@ -55,7 +55,7 @@ describe('Testing the header', () => {
       </Router>
     )
 
-    const button = component.getByText(/buscar/i)
+    const button = component.getByText(/ver productos/i)
     fireEvent.click(button)
     expect(history.location.pathname).toBe('/search')
   })
@@ -99,6 +99,6 @@ describe('Testing the header', () => {
         }
       }
     )
-    component.getByText(/mi cuenta/i)
+    component.getByText(/mis compras/i)
   })
 })

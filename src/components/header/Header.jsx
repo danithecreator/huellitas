@@ -22,7 +22,7 @@ const Header = (_props) => {
   }
 
   return (
-    <Navbar bg='light' expand='lg' className='header shadow-sm'>
+    <Navbar bg='light' expand='lg' className='header shadow-sm '>
       <Container>
         <Navbar.Brand>
           <div className='header__logo'>
@@ -41,7 +41,7 @@ const Header = (_props) => {
             </Nav.Link>
             <Nav.Link>
               <Link className='header__cta' to='/search'>
-                Buscar
+                Ver productos
               </Link>
             </Nav.Link>
           </Nav>
@@ -54,7 +54,7 @@ const Header = (_props) => {
             {currentUser && [
               <Nav.Link eventKey={2}>
                 <Link className='header__cta' to='/dashboard'>
-                  Mi cuenta
+                  Mis compras
                 </Link>
               </Nav.Link>,
               <Nav.Link eventKey={3}>

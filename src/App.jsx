@@ -23,7 +23,8 @@ import Admin from './pages/Admin/Admin'
 import Search from './pages/Search/Search'
 import ProductDetails from './pages/ProductDetails/ProductDetails'
 import Cart from './pages/Cart/cart'
-import Payment from './pages/Payment/payment';
+import Payment from './pages/Payment/payment'
+import Order from './pages/Order/Order'
 
 const App = (_props) => {
   const dispatch = useDispatch()
@@ -92,13 +93,16 @@ const App = (_props) => {
           )}
         />
 
-        <Route path="/payment" render={() => (
-          <WithAuth>
-            <MainLayout>
-              <Payment />
-            </MainLayout>
-          </WithAuth>
-        )}/>
+        <Route
+          path='/payment'
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <Payment />
+              </MainLayout>
+            </WithAuth>
+          )}
+        />
 
         <Route
           path='/registration'
@@ -136,7 +140,16 @@ const App = (_props) => {
             </WithAuth>
           )}
         ></Route>
-
+        <Route
+          path='/order/:orderID'
+          render={() => (
+            <WithAdminAuth>
+              <MainLayout>
+                <Order></Order>
+              </MainLayout>
+            </WithAdminAuth>
+          )}
+        ></Route>
         <Route
           path='/admin'
           render={() => (

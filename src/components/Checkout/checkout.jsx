@@ -12,6 +12,7 @@ import Item from './Item/item'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Button } from 'react-bootstrap'
+import { formatter } from '../../Utils'
 
 const mapState = createStructuredSelector({
   carItems: selectCartItems,
@@ -22,14 +23,13 @@ const Checkout = ({}) => {
   const history = useHistory()
   const { carItems, total } = useSelector(mapState)
 
-  
   return (
     <div className='container'>
       <h1 className='mt-3 mb-5'>Carrito</h1>
       {carItems.map((item, pos) => {
         return <Item key={pos} {...item}></Item>
       })}
-      <h3 className='mt-5'>Total: ${total}</h3>
+      <h3 className='mt-5'>Total: {formatter.format(total)}</h3>
       <section className='mt-4'>
         <Button
           variant='secondary'
@@ -38,62 +38,11 @@ const Checkout = ({}) => {
         >
           Seguir comprando
         </Button>
-        <Button onClick={()=> history.push('/payment')}  className='cartBtn'>Verificar</Button>
+        <Button onClick={() => history.push('/payment')} className='cartBtn'>
+          Comprar
+        </Button>
       </section>
     </div>
-
-    /*  <div className='container'>
-      <br></br>
-      <h1>Carrito</h1>
-
-      <div className='container'>
-        {carItems.length > 0 ? (
-          <table>
-            <tbody>
-              <tr>
-                <table>
-                  <tbody>
-                    {carItems.map((item, pos) => {
-                      return (
-                        <tr key={pos}>
-                          <td>
-                            <Item {...item} />
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </tr>
-
-              <tr>
-                <table>
-                  <tr>
-                    <h3>Total: ${total}</h3>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <Button
-                        variant='secondary'
-                        onClick={() => history.goBack()}
-                      >
-                        Seguir comprando
-                      </Button>
-                    </td>
-                    <td>
-                      <Button variant='secondary'>Verificar</Button>
-                    </td>
-                  </tr>
-                </table>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          <p>{errMsg}</p>
-        )}
-      </div>
-    </div> */
   )
 }
 

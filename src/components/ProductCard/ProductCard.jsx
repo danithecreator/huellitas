@@ -9,7 +9,7 @@ import {
 import { addProduct } from './../../redux/Cart/cart.actions'
 import Button from '../forms/button/Button'
 import { Col, Container, Row } from 'react-bootstrap'
-
+import { formatter } from '../../Utils'
 const mapState = (state) => ({
   product: state.productsData.product
 })
@@ -60,7 +60,7 @@ function ProductCard() {
             </h2>
             <div className='productCard__detailsPrice'>
               <span>Precio</span>
-              <p>${productSellPrice}</p>
+              <p>{formatter.format(productSellPrice)}</p>
             </div>
             <Row>
               <Col

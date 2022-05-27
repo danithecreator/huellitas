@@ -5,7 +5,7 @@ import Button from '../../forms/button/Button'
 import { useDispatch } from 'react-redux'
 import { addProduct } from './../../../redux/Cart/cart.actions'
 import { Card } from 'react-bootstrap'
-
+import { formatter } from '../../../Utils'
 const Product = (product, _key) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -43,7 +43,9 @@ const Product = (product, _key) => {
               {productName}
             </p>
           </Card.Title>
-          <Card.Text className='mb-3 '>${productSellPrice}</Card.Text>
+          <Card.Text className='mb-3 '>
+            {formatter.format(productSellPrice)}
+          </Card.Text>
         </Card.Body>
       </Link>
 

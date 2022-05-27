@@ -21,7 +21,7 @@ describe('Testing the product component', () => {
       </BrowserRouter>
     )
     component.getByText(/equilibrio - todas las razas adulto/i)
-    component.getByText('$50000')
+    component.getByText('$ 50.000')
     const button = component.getAllByText(/agregar al carrito/i)
     const thumb = component.getByRole('img')
     expect(thumb).toHaveAttribute('src', product.productThumbnail)

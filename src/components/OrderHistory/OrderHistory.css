@@ -1,0 +1,12 @@
+.order__tableHeader {
+  border-bottom: 1px solid #f3b26c;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+.order__tableRow {
+  transition: ease-in-out 150ms all;
+}
+.order__tableRow:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+}

@@ -16,7 +16,7 @@ import FormFileUpload from '../../components/forms/formFileUpload/FormFileUpload
 import LoadMore from '../../components/LoadMore/LoadMore'
 import './admin.css'
 import { Col, Row, Table } from 'react-bootstrap'
-
+import { formatter } from '../../Utils'
 const mapState = ({ productsData }) => ({
   products: productsData.products
 })
@@ -303,7 +303,7 @@ const Admin = (_props) => {
                   max='100000000'
                   step='1'
                   value={productStock}
-                  handleChange={(e) => setProductStock(e.target.value)}
+                  handleChange={(e) => setProductStock(~~e.target.value)}
                 />
               </Col>
             </Row>
@@ -317,7 +317,7 @@ const Admin = (_props) => {
                   max='100000000'
                   step='1'
                   value={productBuyPrice}
-                  handleChange={(e) => setProductBuyPrice(e.target.value)}
+                  handleChange={(e) => setProductBuyPrice(~~e.target.value)}
                 />
               </Col>
               <Col lg={6} sm={12} className=' '>
@@ -329,7 +329,7 @@ const Admin = (_props) => {
                   max='100000000'
                   step='1'
                   value={productSellPrice}
-                  handleChange={(e) => setProductSellPrice(e.target.value)}
+                  handleChange={(e) => setProductSellPrice(~~e.target.value)}
                 />
               </Col>
             </Row>
@@ -481,8 +481,8 @@ const Admin = (_props) => {
                             <td>{productName}</td>
                             <td>{productPet}</td>
                             <td>{productCategory}</td>
-                            <td>${productBuyPrice}</td>
-                            <td>${productSellPrice}</td>
+                            <td>{formatter.format(productBuyPrice)}</td>
+                            <td>{formatter.format(productSellPrice)}</td>
                             <td>{productStock}</td>
                             <td>
                               <Button
@@ -498,9 +498,8 @@ const Admin = (_props) => {
                               <Button
                                 type='btnTable'
                                 onClick={() => {
-                                  setEditProduct(product),
-                                    setIsAdding(false)
-                          
+                                  setEditProduct(product), setIsAdding(false)
+                                  toggleModal()
                                 }}
                               >
                                 Editar

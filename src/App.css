@@ -6,6 +6,7 @@ html {
   font-weight: 400;
   font-size: 1rem;
   color: #161515;
+  scroll-behavior: smooth;
 }
 .App,
 .fullHeight {

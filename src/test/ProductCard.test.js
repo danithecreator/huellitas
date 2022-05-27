@@ -20,7 +20,7 @@ describe('Testing the product card', () => {
               productThumbnail:
                 'https://firebasestorage.googleapis.com/v0/b/huellitas-e564f.appspot.com/o/productImages%2Fcoste.gif?alt=media&token=e0f56bc4-71dc-42c8-be39-aa72874bc3ca',
               productName: 'ZeeDog Super Orange - Naranja',
-              productSellPrice: '13000',
+              productSellPrice: '$13.000',
               productBenefits:
                 'Son blandas para su fácil digestión; con una alta palatividad, preparados y horneados muy cuidadosamente. Tu mascota tiene que el verdadero sabor natural.',
               productDescription:
