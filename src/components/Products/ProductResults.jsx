@@ -65,7 +65,7 @@ function ProductResults() {
       },
       {
         name: 'Perros',
-        value: 'perros'
+        value: 'perro'
       },
       {
         name: 'Gatos',
